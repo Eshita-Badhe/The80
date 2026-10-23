@@ -28,7 +28,9 @@ SCENARIOS = {
 
 def generate_records(count: int = 720, seed: int = 80, start: datetime | None = None) -> list[dict]:
     rng = random.Random(seed)
-    start = start or datetime.now(timezone.utc) - timedelta(hours=12)
+    if start is None:
+        current_hour = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+        start = current_hour - timedelta(hours=12)
     rows = []
     for i in range(count):
         station = rng.choice(STATIONS)

@@ -1,15 +1,23 @@
 from __future__ import annotations
-import csv, io, json, os
+import csv, io, json, os, re, time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import FastAPI, File, HTTPException, Request, UploadFile
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from backend.services.data_generator import STATIONS, SCENARIOS, baseline_dataset, generate_scenario
-from backend.services.processor import process_records
+from backend.services.processor import THRESHOLDS, process_records
+from backend.services.groq_ai import AIProviderError, answer_investigation_question, configuration as groq_configuration, explain_root_cause, provider_status, verify_incident_evidence
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+except ImportError:
+    pass
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = Path(__file__).resolve().parent / "data"
@@ -17,13 +25,81 @@ DATA_DIR.mkdir(exist_ok=True)
 MAX_UPLOAD = 5 * 1024 * 1024
 app = FastAPI(title="MetroPulse AI", version="0.1.0", description="Simulated metro infrastructure incident intelligence prototype.")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+
+@app.exception_handler(RequestValidationError)
+async def validation_error_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(status_code=422, content={"detail": "Invalid request data. Check message and incident fields."})
+
 records: list[dict[str, Any]] = baseline_dataset()
 processed = process_records(records)
 history: list[dict] = [{"id": "ING-BASELINE", "filename": "simulated_baseline.json", "format": "JSON", "records": len(records), "accepted": len(records), "rejected": 0, "status": "ready", "created_at": datetime.now(timezone.utc).isoformat(), "simulated": True}]
 simulation_playing = False
+ai_requests: dict[str, list[float]] = {}
 
 class ScenarioRequest(BaseModel):
     scenario: str = Field(default="communications")
+
+class AIIncidentRequest(BaseModel):
+    incident_id: str = Field(min_length=1, max_length=100)
+
+class AIChatMessage(BaseModel):
+    role: str = Field(pattern="^(user|assistant)$")
+    content: str = Field(min_length=1, max_length=3000)
+
+class AIChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=1200)
+    incident_id: str | None = Field(default=None, max_length=100)
+    conversation_context: list[AIChatMessage] = Field(default_factory=list, max_length=8)
+
+def ai_call(function, *args):
+    try:
+        return function(*args)
+    except AIProviderError as exc:
+        raise HTTPException(exc.status_code, detail=str(exc)) from None
+
+def check_ai_rate_limit(request: Request):
+    now = time.monotonic()
+    address = request.client.host if request.client else "unknown"
+    recent = [stamp for stamp in ai_requests.get(address, []) if now - stamp < 60]
+    if len(recent) >= 20:
+        raise HTTPException(429, detail="AI request limit reached. Please wait a minute and retry.")
+    recent.append(now)
+    ai_requests[address] = recent
+
+def incident_ai_context(incident_id: str) -> dict[str, Any]:
+    incident = next((item for item in processed["incidents"] if item["incident_id"].lower() == incident_id.lower()), None)
+    if incident is None:
+        raise HTTPException(404, detail="Incident not found in the current dataset")
+    record_ids = set(incident.get("record_ids", []))
+    evidence = [event for event in processed["events"] if event.get("record_id") in record_ids]
+    anomalies = [item for item in processed["anomalies"] if item.get("record_id") in record_ids]
+    # The deterministic engine ranks incidents; it does not currently rank causal hypotheses.
+    return {
+        "data_notice": "Fictional simulated or user-provided prototype data; not a live metro feed.",
+        "incident": {key: incident.get(key) for key in ("incident_id", "timestamp", "station_id", "equipment_id", "equipment_category", "type", "severity", "status", "priority", "priority_score", "event_count", "explanation")},
+        "source_classification_candidate": {"label": incident.get("type"), "note": "Observed event classification only; not a verified cause."},
+        "anomalies": [{key: item.get(key) for key in ("anomaly_id", "record_id", "timestamp", "station_id", "equipment_id", "type", "metric", "observed_value", "threshold", "severity", "explanation")} for item in anomalies[:20]],
+        "telemetry_evidence": [{key: event.get(key) for key in ("record_id", "timestamp", "station_id", "equipment_id", "equipment_category", "event_type", "severity", "metric", "value", "unit", "description", "source")} for event in evidence[:20]],
+        "deterministic_diagnostic_checks": ["Review equipment maintenance history and recent work orders.", "Verify the reported sensor against an independent measurement.", "Check upstream supply and neighboring equipment telemetry."],
+        "deterministic_method": "Priority score uses source severity, linked event count, and rule-based anomaly count. No deterministic root-cause ranking or independent verification engine is implemented.",
+    }
+
+def relevant_chat_context(message: str, incident_id: str | None) -> dict[str, Any]:
+    match = re.search(r"(?:MP-)?INC-[A-Za-z0-9-]+", message, re.IGNORECASE)
+    selected = match.group(0) if match else incident_id
+    if selected:
+        return {"selected_incident": incident_ai_context(selected)}
+    incidents = processed["incidents"][:8]
+    anomalies = sorted(processed["anomalies"], key=lambda item: item["timestamp"], reverse=True)[:12]
+    event_by_id = {event["record_id"]: event for event in processed["events"]}
+    return {
+        "data_notice": "Fictional simulated or user-provided prototype data; not a live metro feed.",
+        "dataset_summary": processed["statistics"],
+        "selection_rule": "Incidents listed are the deterministic highest-priority records. Anomalies are the 12 latest by timestamp.",
+        "highest_priority_incidents": [{key: item.get(key) for key in ("incident_id", "timestamp", "station_id", "equipment_id", "type", "severity", "priority", "priority_score", "status", "explanation")} for item in incidents],
+        "latest_anomalies": [{**{key: item.get(key) for key in ("anomaly_id", "record_id", "timestamp", "station_id", "equipment_id", "type", "metric", "observed_value", "threshold", "severity", "explanation")}, "source_event": {key: event_by_id.get(item.get("record_id"), {}).get(key) for key in ("description", "source", "raw_log")}} for item in anomalies],
+        "incident_details_available_on_request": [item["incident_id"] for item in incidents],
+    }
 
 def parse_upload(name: str, content: bytes) -> list[dict]:
     if len(content) > MAX_UPLOAD:
@@ -55,9 +131,66 @@ def parse_upload(name: str, content: bytes) -> list[dict]:
 @app.get("/api/health")
 def health(): return {"status": "operational", "mode": "SIMULATION MODE", "simulated": True}
 
+@app.get("/api/config")
+def configuration():
+    return {
+        "simulated": True,
+        "network": {"stations": len(STATIONS), "station_list": STATIONS},
+        "thresholds": THRESHOLDS,
+        "scenarios": {
+            key: {
+                "equipment_category": scenario["category"],
+                "event_type": scenario["event_type"],
+                "severity": scenario["severity"],
+                "station_id": scenario["station"],
+            }
+            for key, scenario in SCENARIOS.items()
+        },
+        "supported_simulation_controls": ["start", "pause", "reset"],
+        "capabilities": {
+            "verification": "unavailable",
+            "root_cause": "unavailable",
+            "llm_explanation": "configured" if groq_configuration()[0] else "not_configured",
+        },
+    }
+
+@app.get("/api/ai/status")
+def ai_status():
+    return provider_status()
+
+@app.post("/api/ai/chat")
+def ai_chat(payload: AIChatRequest, request: Request):
+    check_ai_rate_limit(request)
+    message = payload.message.strip()
+    if not message:
+        raise HTTPException(422, detail="Message cannot be blank")
+    context = relevant_chat_context(message, payload.incident_id)
+    history_items = [{"role": item.role, "content": item.content.strip()} for item in payload.conversation_context if item.content.strip()]
+    answer = ai_call(answer_investigation_question, message, context, history_items)
+    selected_incident = context.get("selected_incident", {}).get("incident", {}).get("incident_id")
+    return {"answer": answer, "incident_id": selected_incident or payload.incident_id, "simulated": True, "provider": "Groq"}
+
+@app.post("/api/ai/explain")
+def ai_explain(payload: AIIncidentRequest, request: Request):
+    check_ai_rate_limit(request)
+    context = incident_ai_context(payload.incident_id)
+    explanation = ai_call(explain_root_cause, context)
+    return {"incident_id": context["incident"]["incident_id"], "explanation": explanation, "advisory": True, "simulated": True}
+
+@app.post("/api/ai/verify")
+def ai_verify(payload: AIIncidentRequest, request: Request):
+    check_ai_rate_limit(request)
+    context = incident_ai_context(payload.incident_id)
+    result = ai_call(verify_incident_evidence, context)
+    return {"incident_id": context["incident"]["incident_id"], "verification": result, "advisory": True, "simulated": True}
+
 @app.get("/api/dashboard")
 def dashboard():
-    stats = processed["statistics"]
+    stats = {
+        **processed["statistics"],
+        "high_priority_incidents": sum(1 for incident in processed["incidents"] if incident["priority"] == "high"),
+        "equipment_affected": len({incident["equipment_id"] for incident in processed["incidents"]}),
+    }
     incidents = processed["incidents"]
     count_by_station = {s["station_id"]: 0 for s in STATIONS}
     for i in incidents:
@@ -82,7 +215,18 @@ def get_incidents(q: str = "", station: str = "", severity: str = "", limit: int
     return {"incidents": result[:max(1,min(limit,500))], "total": len(result), "simulated": True}
 
 @app.get("/api/anomalies")
-def get_anomalies(): return {"anomalies": processed["anomalies"], "total": len(processed["anomalies"]), "simulated": True}
+def get_anomalies():
+    events_by_id = {event["record_id"]: event for event in processed["events"]}
+    findings = []
+    for anomaly in processed["anomalies"]:
+        event = events_by_id.get(anomaly["record_id"], {})
+        findings.append({
+            **anomaly,
+            "source": event.get("source", "unknown"),
+            "raw_log": event.get("raw_log"),
+            "event_description": event.get("description"),
+        })
+    return {"anomalies": findings, "total": len(findings), "simulated": True}
 
 @app.get("/api/processing/summary")
 def summary(): return {**processed["statistics"], "processed_at": datetime.now(timezone.utc).isoformat(), "simulated": True}
@@ -142,7 +286,7 @@ def simulation_tick():
         return {"playing": False, "records_added": 0, "simulated": True}
     # Playback advances the demo with nominal telemetry; failures remain user-triggered.
     from backend.services.data_generator import generate_records
-    batch = generate_records(3, seed=len(records) + 80)
+    batch = generate_records(3, seed=len(records) + 80, start=datetime.now(timezone.utc))
     records.extend(batch)
     processed = process_records(records)
     return {"playing": True, "records_added": len(batch), "simulated": True}
