@@ -983,6 +983,21 @@ tbody tr:hover{
 .danger-button:hover{border-color:#ef809a;background:#472138}
 .drawer-actions{margin:16px 0}
 .drawer .readable-evidence{font:12px/1.6 var(--sans)}
+.ai-operation-content{max-height:540px;overflow:auto}
+.review-section{padding:9px 0;border-top:1px solid #40385f}
+.review-section h4{margin:0 0 6px;color:#91f1e4;font-size:11px;letter-spacing:.02em}
+.review-section p{margin:0;color:#cbc6dd;font-size:11px;line-height:1.65;overflow-wrap:anywhere}
+.review-section ul{margin:0;padding-left:18px;color:#cbc6dd;font-size:11px;line-height:1.7}
+.review-section li{padding:2px 0}
+.review-empty{color:#9994b4!important;font-style:italic}
+.hypothesis-card{padding:9px 10px;margin:7px 0;background:#19172a;border:1px solid #39314f;border-radius:6px}
+.hypothesis-title{display:flex;align-items:flex-start;justify-content:space-between;gap:9px;color:#e1d9f5;font-size:11px;font-weight:600}
+.hypothesis-card p{margin:7px 0;color:#bdb8d0;font-size:10px;line-height:1.6}
+.hypothesis-card small{display:block;color:#8e89a8;font:9px var(--mono);overflow-wrap:anywhere}
+.assessment-badge{flex:none;padding:3px 6px;border-radius:4px;background:#263832;color:#91e5c6;font:9px var(--mono);text-transform:uppercase}
+.assessment-badge.contradicts{background:#43272f;color:#ffadb4}
+.assessment-badge.insufficient{background:#3a3325;color:#f0ce87}
+.review-limits{background:#181526;padding:10px;border-radius:5px}
 @media(max-width:1100px){
     .metrics,.incident-summary{grid-template-columns:repeat(3,minmax(0,1fr))}
     .incident-filters{grid-template-columns:repeat(3,minmax(0,1fr))}

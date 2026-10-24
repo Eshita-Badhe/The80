@@ -16,13 +16,13 @@ uvicorn backend.main:app --reload
 
 Open `http://127.0.0.1:8000`. The FastAPI server also serves the frontend files.
 
-To enable Groq AI, set `GROQ_API_KEY` in `The80/.env` or the backend process environment. `GROQ_MODEL` defaults to `openai/gpt-oss-120b` and can be changed to another model enabled for your Groq account. Never put the key in frontend files or browser environment variables.
+To enable OpenAI AI investigation, open `The80/.env` and replace the placeholder `OPENAI_API_KEY` with your OpenAI API key. `OPENAI_MODEL` defaults to `gpt-4o-mini`; set it to a model available to your OpenAI API project if needed. Never put the key in frontend files, HTML, JavaScript, or browser environment variables. The backend sends only the selected incident's bounded evidence context to OpenAI when you request a review, explanation, or chat response.
 
 ## AI endpoints
 
-- `GET /api/ai/status` checks the configured model against Groq and reports online only when the credentials and model are accepted.
+- `GET /api/ai/status` checks the configured model against OpenAI and reports online only when the credentials and model are accepted.
 - `POST /api/ai/chat` answers using bounded context from current incidents, anomalies, and telemetry.
 - `POST /api/ai/explain` generates an advisory incident explanation.
 - `POST /api/ai/verify` returns structured advisory evidence review JSON.
 
-AI output does not change deterministic incident priority, confirm root causes, or operate infrastructure. The floating assistant keeps conversation messages in browser memory for the current page session; conversations are not saved to the backend.
+AI output does not change deterministic incident priority, confirm root causes, or operate infrastructure. OpenAI API usage may incur charges under your OpenAI account. The floating assistant keeps conversation messages in browser memory for the current page session; conversations are not saved to the backend.

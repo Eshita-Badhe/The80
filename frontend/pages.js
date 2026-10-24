@@ -452,6 +452,24 @@ function renderAnomalyEvidence() {
     update();
 }
 
+function reviewList(title, items) {
+    const values = Array.isArray(items) ? items.filter(item => typeof item === 'string' && item.trim()) : [];
+    return `<section class="review-section"><h4>${esc(title)}</h4>${values.length ? `<ul>${values.map(item => `<li>${esc(item)}</li>`).join('')}</ul>` : '<p class="review-empty">None identified in the supplied evidence.</p>'}</section>`;
+}
+
+function renderEvidenceReview(review) {
+    const assessments = Array.isArray(review.hypothesis_assessments) ? review.hypothesis_assessments : [];
+    return `<div class="ai-operation-content"><b>AI evidence review · advisory, not a confirmed cause</b>
+        <section class="review-section"><h4>Incident summary</h4><p>${esc(review.incident_summary || 'No summary was returned.')}</p></section>
+        <section class="review-section"><h4>Hypothesis assessments</h4>${assessments.length ? assessments.map((item, index) => `<article class="hypothesis-card"><div class="hypothesis-title"><span>${index + 1}. ${esc(item.hypothesis || 'Unspecified hypothesis')}</span><span class="assessment-badge ${esc(item.assessment || 'insufficient')}">${esc(item.assessment || 'insufficient')}</span></div><p>${esc(item.reasoning || 'No reasoning provided.')}</p>${Array.isArray(item.evidence_references) && item.evidence_references.length ? `<small>Evidence IDs: ${item.evidence_references.map(esc).join(' · ')}</small>` : '<small>No linked evidence IDs.</small>'}</article>`).join('') : '<p class="review-empty">No hypothesis assessments returned.</p>'}</section>
+        ${reviewList('Contradictory signals', review.contradictory_signals)}
+        ${reviewList('Missing information', review.missing_information)}
+        ${reviewList('Alternative explanations', review.alternative_explanations)}
+        ${reviewList('Recommended diagnostic checks', review.recommended_checks)}
+        <section class="review-section review-limits"><h4>Uncertainty and limitations</h4><p>${esc(review.uncertainty_and_limitations || 'AI output is advisory and may be incomplete.')}</p></section>
+    </div>`;
+}
+
 function rootCause() {
     if (!state.allIncidents) {
         $('#view').innerHTML = `<div class="welcome"><div><div class="eyebrow">Evidence-led investigation</div><h2>Root Cause Analysis</h2><p>Loading current incident list…</p></div></div><div class="empty">Loading incidents…</div>`;
@@ -497,10 +515,10 @@ function renderRootCause(detail) {
         ['Processed and grouped', true, null],
         ['Rule anomaly detection', true, null, detail.anomalies.length ? `${detail.anomalies.length} linked finding(s)` : 'Completed · no linked anomaly finding'],
         ['Supporting evidence returned', true, null, `${detail.evidence.length} source record(s)`],
-        ['AI evidence review', null, null, 'Advisory only; available when Groq is online'],
+        ['AI evidence review', null, null, 'Advisory only; available when OpenAI is online'],
         ['Priority assessed', true, null],
         ['Root-cause engine', null, null],
-        ['AI investigation explanation', null, null, 'Generated on demand when Groq is online'],
+        ['AI investigation explanation', null, null, 'Generated on demand when OpenAI is online'],
         ['Report generation', false, null, 'Available on demand from Reports'],
     ];
 
@@ -517,12 +535,12 @@ function renderRootCause(detail) {
             <section class="panel">
                 <div class="panel-head"><div><div class="panel-title">Evidence summary</div><div class="panel-sub">${detail.evidence.length} source record(s) · ${detail.anomalies.length} linked rule finding(s)</div></div><span class="badge">OBSERVED DATA</span></div>
                 ${detail.anomalies.length ? detail.anomalies.map(anomaly => `<div class="evidence-card"><b>${esc(anomaly.metric || anomaly.type)}: ${esc(anomaly.observed_value ?? 'event')}</b><span>${new Date(anomaly.timestamp).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})} · ${esc(anomaly.station_id)} · ${esc(anomaly.equipment_id)}</span><p>${esc(anomaly.explanation)} ${anomaly.threshold != null ? `Configured threshold: ${esc(JSON.stringify(anomaly.threshold))}.` : ''}</p></div>`).join('') : '<div class="empty compact-empty">No rule anomaly is linked to this incident. The incident was grouped from event severity or explicit event data.</div>'}
-                <div class="verification-callout"><b>AI evidence review · advisory</b><span>Groq can assess evidence quality and uncertainty. This review cannot confirm a root cause or change deterministic priority.</span><button class="btn" id="ai-verify-incident">Review evidence with AI</button><div id="ai-verification-result" class="ai-operation-result" aria-live="polite"></div></div>
+                <div class="verification-callout"><b>AI evidence review · advisory</b><span>OpenAI can assess evidence quality and uncertainty. This review cannot confirm a root cause or change deterministic priority.</span><button class="btn" id="ai-verify-incident">Review evidence with AI</button><div id="ai-verification-result" class="ai-operation-result" aria-live="polite"></div></div>
                 <div class="evidence-state unavailable"><b>Evidence gaps</b><span>Maintenance history, independent sensor comparisons, adjacent-equipment correlations, and verified service-impact data are not available from the current APIs. Conflicting signals are not evaluated.</span></div>
             </section>
             <section class="panel">
                 <div class="panel-head"><div><div class="panel-title">Diagnostic checks</div><div class="panel-sub">Backend suggestions · not causal findings</div></div><span class="badge">UNCONFIRMED</span></div>
-                <div class="cause-unavailable"><b>AI explanation available on demand</b><span>The deterministic processor still supplies incident grouping and priority. Groq explains these observations but does not rank or confirm causes.</span><button class="btn primary" id="ai-explain-incident">Generate AI explanation</button><div id="ai-explanation-result" class="ai-operation-result" aria-live="polite"></div></div>
+                <div class="cause-unavailable"><b>AI explanation available on demand</b><span>The deterministic processor still supplies incident grouping and priority. OpenAI explains these observations but does not rank or confirm causes.</span><button class="btn primary" id="ai-explain-incident">Generate AI explanation</button><div id="ai-explanation-result" class="ai-operation-result" aria-live="polite"></div></div>
                 ${detail.diagnostic_checks.map((check,index) => `<div class="diagnostic-row"><b>0${index+1}</b><span>${esc(check)}</span></div>`).join('')}
                 <p class="panel-sub cause-caution">These checks are recommendations. They do not establish that a listed subsystem caused this incident.</p>
             </section>
@@ -548,7 +566,7 @@ function renderRootCause(detail) {
         target.innerHTML = '<div class="ai-operation-loading">Reviewing the supplied evidence…</div>';
         try {
             const response = await window.MetroPulseAIAPI.verify(incident.incident_id);
-            target.innerHTML = `<div class="ai-operation-content"><b>Advisory evidence review · not a confirmed cause</b><pre>${esc(JSON.stringify(response.verification, null, 2))}</pre></div>`;
+            target.innerHTML = renderEvidenceReview(response.verification);
         } catch (error) {
             target.innerHTML = `<div class="ai-operation-error">${esc(error.message)} <button class="btn ai-operation-retry" data-ai-retry="verify">Retry</button></div>`;
             target.querySelector('[data-ai-retry]').onclick = () => $('#ai-verify-incident').click();
@@ -587,7 +605,7 @@ function investigationReport(detail) {
         `Priority explanation: ${incident.explanation}`,
         `Linked anomalies: ${detail.anomalies.length}`,
         `Source evidence records: ${detail.evidence.length}`,
-        'AI evidence review: advisory and available on demand when Groq is configured; it does not independently verify observations.',
+        'AI evidence review: advisory and available on demand when OpenAI is configured; it does not independently verify observations.',
         'Root cause: unconfirmed; no cause-ranking engine is implemented. AI explanations contextualize the supplied observations only.',
         'Recommended diagnostic checks:',
         ...detail.diagnostic_checks.map(check => `- ${check}`),
@@ -655,7 +673,7 @@ function renderReports() {
             <section class="panel"><div class="panel-head"><div><div class="panel-title">Incidents by severity</div><div class="panel-sub">Filtered incident set</div></div></div>${Object.keys(severityCounts).length ? `<div class="report-bars">${Object.entries(severityCounts).sort((a,b)=>severityRank(b[0])-severityRank(a[0])).map(([name,count]) => `<div class="report-bar-row"><span>${esc(name)}</span><i><b style="width:${count/Math.max(...Object.values(severityCounts))*100}%"></b></i><strong>${count}</strong></div>`).join('')}</div>` : '<div class="empty">No incidents match these filters.</div>'}</section>
             <section class="panel"><div class="panel-head"><div><div class="panel-title">Most affected stations</div><div class="panel-sub">Grouped incidents by station</div></div></div>${topStations.length ? `<div class="report-bars">${topStations.map(([station,count]) => `<div class="report-bar-row"><span>${esc(station)}</span><i><b style="width:${count/Math.max(...topStations.map(item=>item[1]))*100}%"></b></i><strong>${count}</strong></div>`).join('')}</div>` : '<div class="empty">No station totals available.</div>'}</section>
             <section class="panel"><div class="panel-head"><div><div class="panel-title">Common anomaly categories</div><div class="panel-sub">Whole processed dataset</div></div></div>${topAnomalies.length ? `<div class="report-bars">${topAnomalies.map(([name,count]) => `<div class="report-bar-row"><span>${esc(name)}</span><i><b style="width:${count/Math.max(...topAnomalies.map(item=>item[1]))*100}%"></b></i><strong>${count}</strong></div>`).join('')}</div>` : '<div class="empty">No anomaly categories available.</div>'}</section>
-            <section class="panel"><div class="panel-head"><div><div class="panel-title">Investigation coverage</div><div class="panel-sub">Available backend outputs</div></div><span class="badge">PARTIAL</span></div><div class="report-availability"><p><b>Priority:</b> deterministic score is available on each incident.</p><p><b>Evidence:</b> source records and linked rule findings are available per incident.</p><p><b>AI evidence review:</b> advisory assessment is available on demand when Groq is online; it does not confirm causes.</p><p><b>AI explanation:</b> contextualizes the deterministic results and source evidence when Groq is online.</p></div></section>
+            <section class="panel"><div class="panel-head"><div><div class="panel-title">Investigation coverage</div><div class="panel-sub">Available backend outputs</div></div><span class="badge">PARTIAL</span></div><div class="report-availability"><p><b>Priority:</b> deterministic score is available on each incident.</p><p><b>Evidence:</b> source records and linked rule findings are available per incident.</p><p><b>AI evidence review:</b> advisory assessment is available on demand when OpenAI is online; it does not confirm causes.</p><p><b>AI explanation:</b> contextualizes the deterministic results and source evidence when OpenAI is online.</p></div></section>
             <section class="panel"><div class="panel-head"><div><div class="panel-title">Scenario runs</div><div class="panel-sub">Generated simulation inputs in ingestion history</div></div><span class="tag">${scenarioRuns.length} RUNS</span></div>${scenarioRuns.length ? `<div class="scenario-runs">${scenarioRuns.slice(0,6).map(entry => `<div class="setting-row"><span>${esc(entry.filename.replace('scenario_','').replace('.json',''))}<small>${new Date(entry.created_at).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})}</small></span><b>${entry.accepted} events</b></div>`).join('')}</div>` : '<div class="empty">No generated scenarios in ingestion history.</div>'}</section>
         </div>
         <section class="panel report-timeline"><div class="panel-head"><div><div class="panel-title">Events processed over time</div><div class="panel-sub">Hourly counts from the current dashboard response</div></div><span class="tag">SIMULATED</span></div>${bars(state.data.events_by_hour)}</section>

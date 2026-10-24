@@ -11,7 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from backend.services.data_generator import STATIONS, SCENARIOS, baseline_dataset, generate_scenario
 from backend.services.processor import THRESHOLDS, process_records
-from backend.services.groq_ai import AIProviderError, answer_investigation_question, configuration as groq_configuration, explain_root_cause, provider_status, verify_incident_evidence
+from backend.services.openai_ai import AIProviderError, answer_investigation_question, configuration as openai_configuration, explain_root_cause, provider_status, verify_incident_evidence
 
 try:
     from dotenv import load_dotenv
@@ -150,7 +150,7 @@ def configuration():
         "capabilities": {
             "verification": "unavailable",
             "root_cause": "unavailable",
-            "llm_explanation": "configured" if groq_configuration()[0] else "not_configured",
+            "llm_explanation": "configured" if openai_configuration()[0] else "not_configured",
         },
     }
 
@@ -168,7 +168,7 @@ def ai_chat(payload: AIChatRequest, request: Request):
     history_items = [{"role": item.role, "content": item.content.strip()} for item in payload.conversation_context if item.content.strip()]
     answer = ai_call(answer_investigation_question, message, context, history_items)
     selected_incident = context.get("selected_incident", {}).get("incident", {}).get("incident_id")
-    return {"answer": answer, "incident_id": selected_incident or payload.incident_id, "simulated": True, "provider": "Groq"}
+    return {"answer": answer, "incident_id": selected_incident or payload.incident_id, "simulated": True, "provider": "OpenAI"}
 
 @app.post("/api/ai/explain")
 def ai_explain(payload: AIIncidentRequest, request: Request):

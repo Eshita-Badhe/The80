@@ -1,4 +1,4 @@
-"""Groq-backed advisory explanations grounded in processed MetroPulse records."""
+"""OpenAI-backed advisory explanations grounded in processed MetroPulse records."""
 from __future__ import annotations
 
 import json
@@ -7,8 +7,8 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-GROQ_BASE_URL = "https://api.groq.com/openai/v1"
-DEFAULT_MODEL = "openai/gpt-oss-120b"
+OPENAI_BASE_URL = "https://api.openai.com/v1"
+DEFAULT_MODEL = "gpt-4o-mini"
 
 
 class AIProviderError(Exception):
@@ -18,47 +18,50 @@ class AIProviderError(Exception):
 
 
 def configuration() -> tuple[str | None, str]:
-    return os.getenv("GROQ_API_KEY", "").strip() or None, os.getenv("GROQ_MODEL", DEFAULT_MODEL).strip() or DEFAULT_MODEL
+    return os.getenv("OPENAI_API_KEY", "").strip() or None, os.getenv("OPENAI_MODEL", DEFAULT_MODEL).strip() or DEFAULT_MODEL
 
 
 def provider_status() -> dict[str, Any]:
     key, model = configuration()
     if not key:
-        return {"configured": False, "available": False, "provider": "Groq", "model": model, "status": "not_configured", "message": "Add GROQ_API_KEY to the backend environment to enable AI investigation."}
-    request = Request(f"{GROQ_BASE_URL}/models", headers={"Authorization": f"Bearer {key}"})
+        return {"configured": False, "available": False, "provider": "OpenAI", "model": model, "status": "not_configured", "message": "Add OPENAI_API_KEY to the backend environment to enable AI investigation."}
+    request = Request(f"{OPENAI_BASE_URL}/models/{model}", headers={"Authorization": f"Bearer {key}"})
     try:
-        with urlopen(request, timeout=5) as response:
+        with urlopen(request, timeout=8) as response:
             payload = json.loads(response.read().decode("utf-8"))
-        model_ids = {item.get("id") for item in payload.get("data", []) if isinstance(item, dict)}
-        available = model in model_ids
-        return {"configured": True, "available": available, "provider": "Groq", "model": model, "status": "online" if available else "model_unavailable", "message": "Groq is reachable and the selected model is available." if available else "The configured Groq model is not available for this key."}
+        available = payload.get("id") == model
+        return {"configured": True, "available": available, "provider": "OpenAI", "model": model, "status": "online" if available else "model_unavailable", "message": "OpenAI credentials and selected model are available." if available else "The configured OpenAI model is not available for this key."}
     except HTTPError as error:
         if error.code == 401:
-            return {"configured": True, "available": False, "provider": "Groq", "model": model, "status": "invalid_credentials", "message": "Groq rejected this API key. Create a new key and update GROQ_API_KEY."}
-        if error.code == 403:
-            return {"configured": True, "available": False, "provider": "Groq", "model": model, "status": "access_denied", "message": "Groq denied access for this key or model. Check the selected Groq project and model access."}
-        if error.code == 429:
-            return {"configured": True, "available": False, "provider": "Groq", "model": model, "status": "rate_limited", "message": "Groq rate limited the status check. Try again shortly."}
-        return {"configured": True, "available": False, "provider": "Groq", "model": model, "status": "unavailable", "message": "Groq could not complete the model availability check."}
+            status, message = "invalid_credentials", "OpenAI rejected this API key. Check the key in the backend environment."
+        elif error.code == 403:
+            status, message = "access_denied", "OpenAI denied access to this model or project. Check project access and model availability."
+        elif error.code == 429:
+            status, message = "rate_limited", "OpenAI rate limited the status check. Try again shortly."
+        elif error.code == 404:
+            status, message = "model_unavailable", "The configured OpenAI model was not found or is unavailable to this key."
+        else:
+            status, message = "unavailable", "OpenAI could not complete the model availability check."
+        return {"configured": True, "available": False, "provider": "OpenAI", "model": model, "status": status, "message": message}
     except (URLError, TimeoutError, ValueError, OSError):
-        return {"configured": True, "available": False, "provider": "Groq", "model": model, "status": "unavailable", "message": "Groq could not be reached or rejected the backend credentials."}
+        return {"configured": True, "available": False, "provider": "OpenAI", "model": model, "status": "unavailable", "message": "OpenAI could not be reached or the backend credentials could not be checked."}
 
 
 def _completion(messages: list[dict[str, str]], *, json_mode: bool = False) -> str:
     key, model = configuration()
     if not key:
-        raise AIProviderError("Groq AI is not configured. Add GROQ_API_KEY to the backend environment.")
-    body: dict[str, Any] = {"model": model, "messages": messages, "temperature": 0.2, "max_completion_tokens": 1400}
+        raise AIProviderError("OpenAI is not configured. Add OPENAI_API_KEY to the backend environment.")
+    body: dict[str, Any] = {"model": model, "messages": messages, "temperature": 0.2, "max_tokens": 1400}
     if json_mode:
         body["response_format"] = {"type": "json_object"}
     request = Request(
-        f"{GROQ_BASE_URL}/chat/completions",
+        f"{OPENAI_BASE_URL}/chat/completions",
         data=json.dumps(body).encode("utf-8"),
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
         method="POST",
     )
     try:
-        with urlopen(request, timeout=20) as response:
+        with urlopen(request, timeout=30) as response:
             payload = json.loads(response.read().decode("utf-8"))
         content = payload["choices"][0]["message"]["content"]
         if not isinstance(content, str) or not content.strip():
@@ -66,16 +69,18 @@ def _completion(messages: list[dict[str, str]], *, json_mode: bool = False) -> s
         return content.strip()
     except HTTPError as error:
         if error.code == 429:
-            raise AIProviderError("Groq is rate limited right now. Wait a moment and retry.", 503) from None
+            raise AIProviderError("OpenAI rate limited this request. Check your project limits or try again shortly.", 503) from None
         if error.code == 401:
-            raise AIProviderError("Groq rejected GROQ_API_KEY. Create a new API key and update The80/.env.", 503) from None
+            raise AIProviderError("OpenAI rejected OPENAI_API_KEY. Check the key in the backend .env file.", 503) from None
         if error.code == 403:
-            raise AIProviderError("Groq denied access for this key or model. Check the Groq project and model permissions.", 503) from None
-        raise AIProviderError("Groq could not complete this request. Please retry shortly.", 502) from None
+            raise AIProviderError("OpenAI denied access. Check the API project, billing, and model access.", 503) from None
+        if error.code == 404:
+            raise AIProviderError("The configured OpenAI model is unavailable. Check OPENAI_MODEL.", 503) from None
+        raise AIProviderError("OpenAI could not complete this request. Please retry shortly.", 502) from None
     except (URLError, TimeoutError, OSError):
-        raise AIProviderError("Groq did not respond before the request timed out. Please retry.", 504) from None
+        raise AIProviderError("OpenAI did not respond before the request timed out. Please retry.", 504) from None
     except (KeyError, IndexError, TypeError, ValueError, json.JSONDecodeError):
-        raise AIProviderError("Groq returned a response that MetroPulse could not read.", 502) from None
+        raise AIProviderError("OpenAI returned a response that MetroPulse could not read.", 502) from None
 
 
 def _context_text(context: dict[str, Any]) -> str:
@@ -139,4 +144,4 @@ def verify_incident_evidence(context: dict[str, Any]) -> dict[str, Any]:
                 raise ValueError("Unknown evidence reference")
         return result
     except (json.JSONDecodeError, ValueError, TypeError):
-        raise AIProviderError("Groq returned malformed evidence review data. Please retry.", 502) from None
+        raise AIProviderError("OpenAI returned malformed evidence review data. Please retry.", 502) from None
