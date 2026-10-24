@@ -1,0 +1,3105 @@
+{
+ "note": "Synthetic, illustrative topology. Edges with causal=false are monitoring links, not failure propagation.",
+ "stations": [
+  {
+   "code": "VNZ",
+   "name": "Vanaz",
+   "underground": false,
+   "lines": [
+    "L2"
+   ],
+   "zone_controller": "ZC-01",
+   "traction_substation": "TSS-01"
+  },
+  {
+   "code": "IDC",
+   "name": "Ideal Colony",
+   "underground": false,
+   "lines": [
+    "L2"
+   ],
+   "zone_controller": "ZC-01",
+   "traction_substation": "TSS-01"
+  },
+  {
+   "code": "NLS",
+   "name": "Nal Stop",
+   "underground": false,
+   "lines": [
+    "L2"
+   ],
+   "zone_controller": "ZC-01",
+   "traction_substation": "TSS-01"
+  },
+  {
+   "code": "DCG",
+   "name": "Deccan Gymkhana",
+   "underground": false,
+   "lines": [
+    "L2"
+   ],
+   "zone_controller": "ZC-01",
+   "traction_substation": "TSS-01"
+  },
+  {
+   "code": "PMC",
+   "name": "PMC",
+   "underground": false,
+   "lines": [
+    "L2"
+   ],
+   "zone_controller": "ZC-02",
+   "traction_substation": "TSS-02"
+  },
+  {
+   "code": "CVC",
+   "name": "Civil Court",
+   "underground": true,
+   "lines": [
+    "L1",
+    "L2"
+   ],
+   "zone_controller": "ZC-02",
+   "traction_substation": "TSS-02"
+  },
+  {
+   "code": "SJN",
+   "name": "Shivajinagar",
+   "underground": true,
+   "lines": [
+    "L1"
+   ],
+   "zone_controller": "ZC-02",
+   "traction_substation": "TSS-02"
+  },
+  {
+   "code": "PRS",
+   "name": "Pune Railway Station",
+   "underground": false,
+   "lines": [
+    "L2"
+   ],
+   "zone_controller": "ZC-04",
+   "traction_substation": "TSS-03"
+  },
+  {
+   "code": "BPT",
+   "name": "Budhwar Peth",
+   "underground": true,
+   "lines": [
+    "L1"
+   ],
+   "zone_controller": "ZC-03",
+   "traction_substation": "TSS-03"
+  },
+  {
+   "code": "MND",
+   "name": "Mandai",
+   "underground": true,
+   "lines": [
+    "L1"
+   ],
+   "zone_controller": "ZC-03",
+   "traction_substation": "TSS-03"
+  },
+  {
+   "code": "SWG",
+   "name": "Swargate",
+   "underground": true,
+   "lines": [
+    "L1"
+   ],
+   "zone_controller": "ZC-03",
+   "traction_substation": "TSS-03"
+  },
+  {
+   "code": "RMW",
+   "name": "Ramwadi",
+   "underground": false,
+   "lines": [
+    "L2"
+   ],
+   "zone_controller": "ZC-04",
+   "traction_substation": "TSS-03"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "TSS-01",
+   "type": "traction_substation",
+   "system": "TRACTION",
+   "station": null,
+   "train": null
+  },
+  {
+   "id": "TSS-02",
+   "type": "traction_substation",
+   "system": "TRACTION",
+   "station": null,
+   "train": null
+  },
+  {
+   "id": "TSS-03",
+   "type": "traction_substation",
+   "system": "TRACTION",
+   "station": null,
+   "train": null
+  },
+  {
+   "id": "ZC-01",
+   "type": "zone_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": null
+  },
+  {
+   "id": "ZC-02",
+   "type": "zone_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": null
+  },
+  {
+   "id": "ZC-03",
+   "type": "zone_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": null
+  },
+  {
+   "id": "ZC-04",
+   "type": "zone_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": null
+  },
+  {
+   "id": "TR01-TCMS",
+   "type": "train_control_mgmt",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR01"
+  },
+  {
+   "id": "TR01-OBC",
+   "type": "onboard_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": "TR01"
+  },
+  {
+   "id": "TR01-D1",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR01"
+  },
+  {
+   "id": "TR01-D2",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR01"
+  },
+  {
+   "id": "TR01-D3",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR01"
+  },
+  {
+   "id": "TR01-D4",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR01"
+  },
+  {
+   "id": "TR01-D5",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR01"
+  },
+  {
+   "id": "TR01-D6",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR01"
+  },
+  {
+   "id": "TR02-TCMS",
+   "type": "train_control_mgmt",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR02"
+  },
+  {
+   "id": "TR02-OBC",
+   "type": "onboard_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": "TR02"
+  },
+  {
+   "id": "TR02-D1",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR02"
+  },
+  {
+   "id": "TR02-D2",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR02"
+  },
+  {
+   "id": "TR02-D3",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR02"
+  },
+  {
+   "id": "TR02-D4",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR02"
+  },
+  {
+   "id": "TR02-D5",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR02"
+  },
+  {
+   "id": "TR02-D6",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR02"
+  },
+  {
+   "id": "TR03-TCMS",
+   "type": "train_control_mgmt",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR03"
+  },
+  {
+   "id": "TR03-OBC",
+   "type": "onboard_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": "TR03"
+  },
+  {
+   "id": "TR03-D1",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR03"
+  },
+  {
+   "id": "TR03-D2",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR03"
+  },
+  {
+   "id": "TR03-D3",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR03"
+  },
+  {
+   "id": "TR03-D4",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR03"
+  },
+  {
+   "id": "TR03-D5",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR03"
+  },
+  {
+   "id": "TR03-D6",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR03"
+  },
+  {
+   "id": "TR04-TCMS",
+   "type": "train_control_mgmt",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR04"
+  },
+  {
+   "id": "TR04-OBC",
+   "type": "onboard_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": "TR04"
+  },
+  {
+   "id": "TR04-D1",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR04"
+  },
+  {
+   "id": "TR04-D2",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR04"
+  },
+  {
+   "id": "TR04-D3",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR04"
+  },
+  {
+   "id": "TR04-D4",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR04"
+  },
+  {
+   "id": "TR04-D5",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR04"
+  },
+  {
+   "id": "TR04-D6",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR04"
+  },
+  {
+   "id": "TR05-TCMS",
+   "type": "train_control_mgmt",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR05"
+  },
+  {
+   "id": "TR05-OBC",
+   "type": "onboard_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": "TR05"
+  },
+  {
+   "id": "TR05-D1",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR05"
+  },
+  {
+   "id": "TR05-D2",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR05"
+  },
+  {
+   "id": "TR05-D3",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR05"
+  },
+  {
+   "id": "TR05-D4",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR05"
+  },
+  {
+   "id": "TR05-D5",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR05"
+  },
+  {
+   "id": "TR05-D6",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR05"
+  },
+  {
+   "id": "TR06-TCMS",
+   "type": "train_control_mgmt",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR06"
+  },
+  {
+   "id": "TR06-OBC",
+   "type": "onboard_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": "TR06"
+  },
+  {
+   "id": "TR06-D1",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR06"
+  },
+  {
+   "id": "TR06-D2",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR06"
+  },
+  {
+   "id": "TR06-D3",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR06"
+  },
+  {
+   "id": "TR06-D4",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR06"
+  },
+  {
+   "id": "TR06-D5",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR06"
+  },
+  {
+   "id": "TR06-D6",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR06"
+  },
+  {
+   "id": "TR07-TCMS",
+   "type": "train_control_mgmt",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR07"
+  },
+  {
+   "id": "TR07-OBC",
+   "type": "onboard_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": "TR07"
+  },
+  {
+   "id": "TR07-D1",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR07"
+  },
+  {
+   "id": "TR07-D2",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR07"
+  },
+  {
+   "id": "TR07-D3",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR07"
+  },
+  {
+   "id": "TR07-D4",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR07"
+  },
+  {
+   "id": "TR07-D5",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR07"
+  },
+  {
+   "id": "TR07-D6",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR07"
+  },
+  {
+   "id": "TR08-TCMS",
+   "type": "train_control_mgmt",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR08"
+  },
+  {
+   "id": "TR08-OBC",
+   "type": "onboard_controller",
+   "system": "CBTC",
+   "station": null,
+   "train": "TR08"
+  },
+  {
+   "id": "TR08-D1",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR08"
+  },
+  {
+   "id": "TR08-D2",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR08"
+  },
+  {
+   "id": "TR08-D3",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR08"
+  },
+  {
+   "id": "TR08-D4",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR08"
+  },
+  {
+   "id": "TR08-D5",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR08"
+  },
+  {
+   "id": "TR08-D6",
+   "type": "train_door",
+   "system": "TCMS",
+   "station": null,
+   "train": "TR08"
+  },
+  {
+   "id": "STN-VNZ",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "VNZ",
+   "train": null
+  },
+  {
+   "id": "LVP-VNZ",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "VNZ",
+   "train": null
+  },
+  {
+   "id": "UPS-VNZ",
+   "type": "ups",
+   "system": "POWER",
+   "station": "VNZ",
+   "train": null
+  },
+  {
+   "id": "RTU-VNZ",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "VNZ",
+   "train": null
+  },
+  {
+   "id": "AFC-VNZ-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "VNZ",
+   "train": null
+  },
+  {
+   "id": "AFC-VNZ-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "VNZ",
+   "train": null
+  },
+  {
+   "id": "ESC-VNZ-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "VNZ",
+   "train": null
+  },
+  {
+   "id": "LFT-VNZ-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "VNZ",
+   "train": null
+  },
+  {
+   "id": "STN-IDC",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "IDC",
+   "train": null
+  },
+  {
+   "id": "LVP-IDC",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "IDC",
+   "train": null
+  },
+  {
+   "id": "UPS-IDC",
+   "type": "ups",
+   "system": "POWER",
+   "station": "IDC",
+   "train": null
+  },
+  {
+   "id": "RTU-IDC",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "IDC",
+   "train": null
+  },
+  {
+   "id": "AFC-IDC-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "IDC",
+   "train": null
+  },
+  {
+   "id": "AFC-IDC-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "IDC",
+   "train": null
+  },
+  {
+   "id": "ESC-IDC-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "IDC",
+   "train": null
+  },
+  {
+   "id": "LFT-IDC-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "IDC",
+   "train": null
+  },
+  {
+   "id": "STN-NLS",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "NLS",
+   "train": null
+  },
+  {
+   "id": "LVP-NLS",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "NLS",
+   "train": null
+  },
+  {
+   "id": "UPS-NLS",
+   "type": "ups",
+   "system": "POWER",
+   "station": "NLS",
+   "train": null
+  },
+  {
+   "id": "RTU-NLS",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "NLS",
+   "train": null
+  },
+  {
+   "id": "AFC-NLS-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "NLS",
+   "train": null
+  },
+  {
+   "id": "AFC-NLS-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "NLS",
+   "train": null
+  },
+  {
+   "id": "ESC-NLS-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "NLS",
+   "train": null
+  },
+  {
+   "id": "LFT-NLS-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "NLS",
+   "train": null
+  },
+  {
+   "id": "STN-DCG",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "DCG",
+   "train": null
+  },
+  {
+   "id": "LVP-DCG",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "DCG",
+   "train": null
+  },
+  {
+   "id": "UPS-DCG",
+   "type": "ups",
+   "system": "POWER",
+   "station": "DCG",
+   "train": null
+  },
+  {
+   "id": "RTU-DCG",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "DCG",
+   "train": null
+  },
+  {
+   "id": "AFC-DCG-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "DCG",
+   "train": null
+  },
+  {
+   "id": "AFC-DCG-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "DCG",
+   "train": null
+  },
+  {
+   "id": "ESC-DCG-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "DCG",
+   "train": null
+  },
+  {
+   "id": "LFT-DCG-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "DCG",
+   "train": null
+  },
+  {
+   "id": "STN-PMC",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "PMC",
+   "train": null
+  },
+  {
+   "id": "LVP-PMC",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "PMC",
+   "train": null
+  },
+  {
+   "id": "UPS-PMC",
+   "type": "ups",
+   "system": "POWER",
+   "station": "PMC",
+   "train": null
+  },
+  {
+   "id": "RTU-PMC",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "PMC",
+   "train": null
+  },
+  {
+   "id": "AFC-PMC-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "PMC",
+   "train": null
+  },
+  {
+   "id": "AFC-PMC-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "PMC",
+   "train": null
+  },
+  {
+   "id": "ESC-PMC-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "PMC",
+   "train": null
+  },
+  {
+   "id": "LFT-PMC-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "PMC",
+   "train": null
+  },
+  {
+   "id": "STN-CVC",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "LVP-CVC",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "UPS-CVC",
+   "type": "ups",
+   "system": "POWER",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "RTU-CVC",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "AFC-CVC-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "AFC-CVC-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "ESC-CVC-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "ESC-CVC-02",
+   "type": "escalator",
+   "system": "EM",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "LFT-CVC-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "ECS-CVC-01",
+   "type": "ventilation_fan",
+   "system": "EM",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "PSD-CVC-P01",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "PSD-CVC-P02",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "PSD-CVC-P03",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "PSD-CVC-P04",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "CVC",
+   "train": null
+  },
+  {
+   "id": "STN-SJN",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "LVP-SJN",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "UPS-SJN",
+   "type": "ups",
+   "system": "POWER",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "RTU-SJN",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "AFC-SJN-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "AFC-SJN-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "ESC-SJN-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "ESC-SJN-02",
+   "type": "escalator",
+   "system": "EM",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "LFT-SJN-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "ECS-SJN-01",
+   "type": "ventilation_fan",
+   "system": "EM",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "PSD-SJN-P01",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "PSD-SJN-P02",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "PSD-SJN-P03",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "PSD-SJN-P04",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "SJN",
+   "train": null
+  },
+  {
+   "id": "STN-PRS",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "PRS",
+   "train": null
+  },
+  {
+   "id": "LVP-PRS",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "PRS",
+   "train": null
+  },
+  {
+   "id": "UPS-PRS",
+   "type": "ups",
+   "system": "POWER",
+   "station": "PRS",
+   "train": null
+  },
+  {
+   "id": "RTU-PRS",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "PRS",
+   "train": null
+  },
+  {
+   "id": "AFC-PRS-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "PRS",
+   "train": null
+  },
+  {
+   "id": "AFC-PRS-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "PRS",
+   "train": null
+  },
+  {
+   "id": "ESC-PRS-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "PRS",
+   "train": null
+  },
+  {
+   "id": "LFT-PRS-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "PRS",
+   "train": null
+  },
+  {
+   "id": "STN-BPT",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "LVP-BPT",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "UPS-BPT",
+   "type": "ups",
+   "system": "POWER",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "RTU-BPT",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "AFC-BPT-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "AFC-BPT-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "ESC-BPT-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "ESC-BPT-02",
+   "type": "escalator",
+   "system": "EM",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "LFT-BPT-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "ECS-BPT-01",
+   "type": "ventilation_fan",
+   "system": "EM",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "PSD-BPT-P01",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "PSD-BPT-P02",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "PSD-BPT-P03",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "PSD-BPT-P04",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "BPT",
+   "train": null
+  },
+  {
+   "id": "STN-MND",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "LVP-MND",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "UPS-MND",
+   "type": "ups",
+   "system": "POWER",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "RTU-MND",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "AFC-MND-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "AFC-MND-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "ESC-MND-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "ESC-MND-02",
+   "type": "escalator",
+   "system": "EM",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "LFT-MND-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "ECS-MND-01",
+   "type": "ventilation_fan",
+   "system": "EM",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "PSD-MND-P01",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "PSD-MND-P02",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "PSD-MND-P03",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "PSD-MND-P04",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "MND",
+   "train": null
+  },
+  {
+   "id": "STN-SWG",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "LVP-SWG",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "UPS-SWG",
+   "type": "ups",
+   "system": "POWER",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "RTU-SWG",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "AFC-SWG-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "AFC-SWG-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "ESC-SWG-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "ESC-SWG-02",
+   "type": "escalator",
+   "system": "EM",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "LFT-SWG-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "ECS-SWG-01",
+   "type": "ventilation_fan",
+   "system": "EM",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "PSD-SWG-P01",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "PSD-SWG-P02",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "PSD-SWG-P03",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "PSD-SWG-P04",
+   "type": "platform_screen_door",
+   "system": "PSD",
+   "station": "SWG",
+   "train": null
+  },
+  {
+   "id": "STN-RMW",
+   "type": "station_service",
+   "system": "OPERATIONS",
+   "station": "RMW",
+   "train": null
+  },
+  {
+   "id": "LVP-RMW",
+   "type": "lv_panel",
+   "system": "POWER",
+   "station": "RMW",
+   "train": null
+  },
+  {
+   "id": "UPS-RMW",
+   "type": "ups",
+   "system": "POWER",
+   "station": "RMW",
+   "train": null
+  },
+  {
+   "id": "RTU-RMW",
+   "type": "rtu",
+   "system": "POWER",
+   "station": "RMW",
+   "train": null
+  },
+  {
+   "id": "AFC-RMW-G01",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "RMW",
+   "train": null
+  },
+  {
+   "id": "AFC-RMW-G02",
+   "type": "afc_gate",
+   "system": "AFC",
+   "station": "RMW",
+   "train": null
+  },
+  {
+   "id": "ESC-RMW-01",
+   "type": "escalator",
+   "system": "EM",
+   "station": "RMW",
+   "train": null
+  },
+  {
+   "id": "LFT-RMW-01",
+   "type": "lift",
+   "system": "EM",
+   "station": "RMW",
+   "train": null
+  }
+ ],
+ "edges": [
+  {
+   "source": "TR01-TCMS",
+   "target": "TR01-D1",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR01-TCMS",
+   "target": "TR01-D2",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR01-TCMS",
+   "target": "TR01-D3",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR01-TCMS",
+   "target": "TR01-D4",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR01-TCMS",
+   "target": "TR01-D5",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR01-TCMS",
+   "target": "TR01-D6",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "TR01-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "TR01-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "TR01-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "TR01-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TR02-TCMS",
+   "target": "TR02-D1",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR02-TCMS",
+   "target": "TR02-D2",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR02-TCMS",
+   "target": "TR02-D3",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR02-TCMS",
+   "target": "TR02-D4",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR02-TCMS",
+   "target": "TR02-D5",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR02-TCMS",
+   "target": "TR02-D6",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "TR02-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "TR02-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "TR02-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "TR02-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TR03-TCMS",
+   "target": "TR03-D1",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR03-TCMS",
+   "target": "TR03-D2",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR03-TCMS",
+   "target": "TR03-D3",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR03-TCMS",
+   "target": "TR03-D4",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR03-TCMS",
+   "target": "TR03-D5",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR03-TCMS",
+   "target": "TR03-D6",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "TR03-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "TR03-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "TR03-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "TR03-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TR04-TCMS",
+   "target": "TR04-D1",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR04-TCMS",
+   "target": "TR04-D2",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR04-TCMS",
+   "target": "TR04-D3",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR04-TCMS",
+   "target": "TR04-D4",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR04-TCMS",
+   "target": "TR04-D5",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR04-TCMS",
+   "target": "TR04-D6",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "TR04-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "TR04-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "TR04-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "TR04-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TR05-TCMS",
+   "target": "TR05-D1",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR05-TCMS",
+   "target": "TR05-D2",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR05-TCMS",
+   "target": "TR05-D3",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR05-TCMS",
+   "target": "TR05-D4",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR05-TCMS",
+   "target": "TR05-D5",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR05-TCMS",
+   "target": "TR05-D6",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-01",
+   "target": "TR05-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "TR05-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-04",
+   "target": "TR05-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-01",
+   "target": "TR05-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "TR05-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "TR05-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TR06-TCMS",
+   "target": "TR06-D1",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR06-TCMS",
+   "target": "TR06-D2",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR06-TCMS",
+   "target": "TR06-D3",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR06-TCMS",
+   "target": "TR06-D4",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR06-TCMS",
+   "target": "TR06-D5",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR06-TCMS",
+   "target": "TR06-D6",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-01",
+   "target": "TR06-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "TR06-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-04",
+   "target": "TR06-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-01",
+   "target": "TR06-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "TR06-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "TR06-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TR07-TCMS",
+   "target": "TR07-D1",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR07-TCMS",
+   "target": "TR07-D2",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR07-TCMS",
+   "target": "TR07-D3",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR07-TCMS",
+   "target": "TR07-D4",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR07-TCMS",
+   "target": "TR07-D5",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR07-TCMS",
+   "target": "TR07-D6",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-01",
+   "target": "TR07-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "TR07-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-04",
+   "target": "TR07-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-01",
+   "target": "TR07-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "TR07-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "TR07-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TR08-TCMS",
+   "target": "TR08-D1",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR08-TCMS",
+   "target": "TR08-D2",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR08-TCMS",
+   "target": "TR08-D3",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR08-TCMS",
+   "target": "TR08-D4",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR08-TCMS",
+   "target": "TR08-D5",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "TR08-TCMS",
+   "target": "TR08-D6",
+   "relation": "door_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-01",
+   "target": "TR08-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "TR08-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "ZC-04",
+   "target": "TR08-OBC",
+   "relation": "cbtc_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-01",
+   "target": "TR08-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "TR08-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "TR08-TCMS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-VNZ",
+   "target": "UPS-VNZ",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-VNZ",
+   "target": "UPS-VNZ",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-VNZ",
+   "target": "LVP-VNZ",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-01",
+   "target": "STN-VNZ",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-01",
+   "target": "STN-VNZ",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-VNZ",
+   "target": "AFC-VNZ-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-VNZ",
+   "target": "AFC-VNZ-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-VNZ",
+   "target": "ESC-VNZ-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-VNZ",
+   "target": "LFT-VNZ-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-IDC",
+   "target": "UPS-IDC",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-IDC",
+   "target": "UPS-IDC",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-IDC",
+   "target": "LVP-IDC",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-01",
+   "target": "STN-IDC",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-01",
+   "target": "STN-IDC",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-IDC",
+   "target": "AFC-IDC-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-IDC",
+   "target": "AFC-IDC-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-IDC",
+   "target": "ESC-IDC-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-IDC",
+   "target": "LFT-IDC-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-NLS",
+   "target": "UPS-NLS",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-NLS",
+   "target": "UPS-NLS",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-NLS",
+   "target": "LVP-NLS",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-01",
+   "target": "STN-NLS",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-01",
+   "target": "STN-NLS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-NLS",
+   "target": "AFC-NLS-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-NLS",
+   "target": "AFC-NLS-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-NLS",
+   "target": "ESC-NLS-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-NLS",
+   "target": "LFT-NLS-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-DCG",
+   "target": "UPS-DCG",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-DCG",
+   "target": "UPS-DCG",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-DCG",
+   "target": "LVP-DCG",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-01",
+   "target": "STN-DCG",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-01",
+   "target": "STN-DCG",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-DCG",
+   "target": "AFC-DCG-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-DCG",
+   "target": "AFC-DCG-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-DCG",
+   "target": "ESC-DCG-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-DCG",
+   "target": "LFT-DCG-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-PMC",
+   "target": "UPS-PMC",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-PMC",
+   "target": "UPS-PMC",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-PMC",
+   "target": "LVP-PMC",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-02",
+   "target": "STN-PMC",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "STN-PMC",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-PMC",
+   "target": "AFC-PMC-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-PMC",
+   "target": "AFC-PMC-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-PMC",
+   "target": "ESC-PMC-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-PMC",
+   "target": "LFT-PMC-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-CVC",
+   "target": "UPS-CVC",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-CVC",
+   "target": "UPS-CVC",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-CVC",
+   "target": "LVP-CVC",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-02",
+   "target": "STN-CVC",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "STN-CVC",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-CVC",
+   "target": "AFC-CVC-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-CVC",
+   "target": "AFC-CVC-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-CVC",
+   "target": "ESC-CVC-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-CVC",
+   "target": "ESC-CVC-02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-CVC",
+   "target": "LFT-CVC-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-CVC",
+   "target": "ECS-CVC-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "UPS-CVC",
+   "target": "PSD-CVC-P01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "PSD-CVC-P01",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-CVC-P01",
+   "target": "STN-CVC",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-CVC",
+   "target": "PSD-CVC-P02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "PSD-CVC-P02",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-CVC-P02",
+   "target": "STN-CVC",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-CVC",
+   "target": "PSD-CVC-P03",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "PSD-CVC-P03",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-CVC-P03",
+   "target": "STN-CVC",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-CVC",
+   "target": "PSD-CVC-P04",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "PSD-CVC-P04",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-CVC-P04",
+   "target": "STN-CVC",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "LVP-SJN",
+   "target": "UPS-SJN",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-SJN",
+   "target": "UPS-SJN",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-SJN",
+   "target": "LVP-SJN",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-02",
+   "target": "STN-SJN",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-02",
+   "target": "STN-SJN",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-SJN",
+   "target": "AFC-SJN-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SJN",
+   "target": "AFC-SJN-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SJN",
+   "target": "ESC-SJN-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SJN",
+   "target": "ESC-SJN-02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SJN",
+   "target": "LFT-SJN-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SJN",
+   "target": "ECS-SJN-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "UPS-SJN",
+   "target": "PSD-SJN-P01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "PSD-SJN-P01",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-SJN-P01",
+   "target": "STN-SJN",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-SJN",
+   "target": "PSD-SJN-P02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "PSD-SJN-P02",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-SJN-P02",
+   "target": "STN-SJN",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-SJN",
+   "target": "PSD-SJN-P03",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "PSD-SJN-P03",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-SJN-P03",
+   "target": "STN-SJN",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-SJN",
+   "target": "PSD-SJN-P04",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-02",
+   "target": "PSD-SJN-P04",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-SJN-P04",
+   "target": "STN-SJN",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "LVP-PRS",
+   "target": "UPS-PRS",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-PRS",
+   "target": "UPS-PRS",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-PRS",
+   "target": "LVP-PRS",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-04",
+   "target": "STN-PRS",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "STN-PRS",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-PRS",
+   "target": "AFC-PRS-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-PRS",
+   "target": "AFC-PRS-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-PRS",
+   "target": "ESC-PRS-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-PRS",
+   "target": "LFT-PRS-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-BPT",
+   "target": "UPS-BPT",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-BPT",
+   "target": "UPS-BPT",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-BPT",
+   "target": "LVP-BPT",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-03",
+   "target": "STN-BPT",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "STN-BPT",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-BPT",
+   "target": "AFC-BPT-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-BPT",
+   "target": "AFC-BPT-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-BPT",
+   "target": "ESC-BPT-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-BPT",
+   "target": "ESC-BPT-02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-BPT",
+   "target": "LFT-BPT-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-BPT",
+   "target": "ECS-BPT-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "UPS-BPT",
+   "target": "PSD-BPT-P01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-BPT-P01",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-BPT-P01",
+   "target": "STN-BPT",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-BPT",
+   "target": "PSD-BPT-P02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-BPT-P02",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-BPT-P02",
+   "target": "STN-BPT",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-BPT",
+   "target": "PSD-BPT-P03",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-BPT-P03",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-BPT-P03",
+   "target": "STN-BPT",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-BPT",
+   "target": "PSD-BPT-P04",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-BPT-P04",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-BPT-P04",
+   "target": "STN-BPT",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "LVP-MND",
+   "target": "UPS-MND",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-MND",
+   "target": "UPS-MND",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-MND",
+   "target": "LVP-MND",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-03",
+   "target": "STN-MND",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "STN-MND",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-MND",
+   "target": "AFC-MND-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-MND",
+   "target": "AFC-MND-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-MND",
+   "target": "ESC-MND-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-MND",
+   "target": "ESC-MND-02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-MND",
+   "target": "LFT-MND-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-MND",
+   "target": "ECS-MND-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "UPS-MND",
+   "target": "PSD-MND-P01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-MND-P01",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-MND-P01",
+   "target": "STN-MND",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-MND",
+   "target": "PSD-MND-P02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-MND-P02",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-MND-P02",
+   "target": "STN-MND",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-MND",
+   "target": "PSD-MND-P03",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-MND-P03",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-MND-P03",
+   "target": "STN-MND",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-MND",
+   "target": "PSD-MND-P04",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-MND-P04",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-MND-P04",
+   "target": "STN-MND",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "LVP-SWG",
+   "target": "UPS-SWG",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-SWG",
+   "target": "UPS-SWG",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-SWG",
+   "target": "LVP-SWG",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-03",
+   "target": "STN-SWG",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "STN-SWG",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-SWG",
+   "target": "AFC-SWG-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SWG",
+   "target": "AFC-SWG-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SWG",
+   "target": "ESC-SWG-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SWG",
+   "target": "ESC-SWG-02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SWG",
+   "target": "LFT-SWG-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-SWG",
+   "target": "ECS-SWG-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "UPS-SWG",
+   "target": "PSD-SWG-P01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-SWG-P01",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-SWG-P01",
+   "target": "STN-SWG",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-SWG",
+   "target": "PSD-SWG-P02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-SWG-P02",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-SWG-P02",
+   "target": "STN-SWG",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-SWG",
+   "target": "PSD-SWG-P03",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-SWG-P03",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-SWG-P03",
+   "target": "STN-SWG",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "UPS-SWG",
+   "target": "PSD-SWG-P04",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "ZC-03",
+   "target": "PSD-SWG-P04",
+   "relation": "psd_sync",
+   "causal": true
+  },
+  {
+   "source": "PSD-SWG-P04",
+   "target": "STN-SWG",
+   "relation": "dwell_impact",
+   "causal": true
+  },
+  {
+   "source": "LVP-RMW",
+   "target": "UPS-RMW",
+   "relation": "mains_input",
+   "causal": true
+  },
+  {
+   "source": "RTU-RMW",
+   "target": "UPS-RMW",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "RTU-RMW",
+   "target": "LVP-RMW",
+   "relation": "monitoring",
+   "causal": false
+  },
+  {
+   "source": "ZC-04",
+   "target": "STN-RMW",
+   "relation": "train_control",
+   "causal": true
+  },
+  {
+   "source": "TSS-03",
+   "target": "STN-RMW",
+   "relation": "traction_power",
+   "causal": true
+  },
+  {
+   "source": "LVP-RMW",
+   "target": "AFC-RMW-G01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-RMW",
+   "target": "AFC-RMW-G02",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-RMW",
+   "target": "ESC-RMW-01",
+   "relation": "power_supply",
+   "causal": true
+  },
+  {
+   "source": "LVP-RMW",
+   "target": "LFT-RMW-01",
+   "relation": "power_supply",
+   "causal": true
+  }
+ ]
+}

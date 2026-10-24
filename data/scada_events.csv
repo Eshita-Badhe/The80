@@ -1,0 +1,164 @@
+rec_id,ts,point,location,prio,code,text
+SC-000001,2026-09-01 02:38:59,ECS-SJN-01,Shivajinagar,3,ECS002,Ventilation fan VFD fault
+SC-000002,2026-09-01 07:42:42,ECS-MND-01,Mandai,3,ECS002,Ventilation fan VFD fault
+SC-000003,2026-09-01 09:29:40,UPS-SWG,Swargate,3,UPS505,UPS battery temperature high
+SC-000004,2026-09-01 11:13:34,ESC-SJN-01,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000005,2026-09-01 11:25:53,ESC-BPT-01,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000006,2026-09-01 13:12:28,ESC-CVC-01,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000007,2026-09-01 13:19:22,ESC-SWG-02,Swargate,3,ESC001,Escalator drive overload trip
+SC-000008,2026-09-01 14:15:16,ESC-DCG-01,Deccan Gymkhana,3,ESC001,Escalator drive overload trip
+SC-000009,2026-09-01 16:08:05,LFT-PMC-01,PMC,3,LFT002,Lift door fault
+SC-000010,2026-09-01 16:14:16,LFT-SWG-01,Swargate,3,LFT002,Lift door fault
+SC-000011,2026-09-01 19:45:56,ESC-BPT-01,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000012,2026-09-01 20:28:51,UPS-MND,Mandai,3,UPS505,UPS battery temperature high
+SC-000013,2026-09-02 06:35:11,ESC-MND-01,Mandai,3,ESC001,Escalator drive overload trip
+SC-000014,2026-09-02 06:49:28,ESC-CVC-02,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000015,2026-09-02 07:07:27,ESC-VNZ-01,Vanaz,3,ESC001,Escalator drive overload trip
+SC-000016,2026-09-02 07:50:12,ESC-MND-02,Mandai,3,ESC001,Escalator drive overload trip
+SC-000017,2026-09-02 08:13:00,UPS-SWG,Swargate,3,UPS505,UPS battery temperature high
+SC-000018,2026-09-02 09:14:56,ESC-PRS-01,Pune Railway Station,3,ESC001,Escalator drive overload trip
+SC-000019,2026-09-02 14:35:37,ESC-CVC-02,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000020,2026-09-02 15:17:27,ESC-DCG-01,Deccan Gymkhana,3,ESC001,Escalator drive overload trip
+SC-000021,2026-09-02 16:16:13,ESC-VNZ-01,Vanaz,3,ESC001,Escalator drive overload trip
+SC-000022,2026-09-02 17:17:00,LVP-IDC,Ideal Colony,1,LVP601,LV panel incomer breaker trip
+SC-000023,2026-09-02 17:17:06,UPS-IDC,Ideal Colony,3,UPS501,UPS mains failure - running on battery
+SC-000024,2026-09-02 17:17:12,ESC-IDC-01,Ideal Colony,2,ESC002,Escalator stopped - power loss
+SC-000025,2026-09-02 17:17:23,LFT-IDC-01,Ideal Colony,2,LFT001,Lift out of service - power loss
+SC-000026,2026-09-02 17:28:37,ESC-PMC-01,PMC,3,ESC001,Escalator drive overload trip
+SC-000027,2026-09-02 18:23:03,ESC-NLS-01,Nal Stop,3,ESC001,Escalator drive overload trip
+SC-000028,2026-09-03 07:19:00,TSS-01,,1,TSS701,Traction feeder circuit breaker trip
+SC-000029,2026-09-03 07:19:01,TSS-01,,2,TSS702,OHE voltage dip below threshold
+SC-000030,2026-09-03 11:01:04,ESC-MND-01,Mandai,3,ESC001,Escalator drive overload trip
+SC-000031,2026-09-03 11:30:00,UPS-BPT,Budhwar Peth,3,UPS505,UPS battery temperature high
+SC-000032,2026-09-03 12:16:00,UPS-BPT,Budhwar Peth,2,UPS502,UPS battery low
+SC-000033,2026-09-03 12:16:13,UPS-BPT,Budhwar Peth,2,UPS504,UPS output voltage out of range
+SC-000034,2026-09-03 12:24:19,LFT-IDC-01,Ideal Colony,3,LFT002,Lift door fault
+SC-000035,2026-09-03 13:04:15,LFT-SWG-01,Swargate,3,LFT002,Lift door fault
+SC-000036,2026-09-03 14:30:05,TSS-02,,3,TSS703,Traction transformer temperature high
+SC-000037,2026-09-03 15:10:23,ESC-RMW-01,Ramwadi,3,ESC001,Escalator drive overload trip
+SC-000038,2026-09-03 15:20:36,ESC-DCG-01,Deccan Gymkhana,3,ESC001,Escalator drive overload trip
+SC-000039,2026-09-03 17:23:45,LFT-PMC-01,PMC,3,LFT002,Lift door fault
+SC-000040,2026-09-03 17:53:50,ESC-PRS-01,Pune Railway Station,3,ESC001,Escalator drive overload trip
+SC-000041,2026-09-03 19:15:00,ESC-BPT-01,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000042,2026-09-03 19:26:00,UPS-SJN,Shivajinagar,3,UPS505,UPS battery temperature high
+SC-000043,2026-09-04 04:16:16,ECS-SWG-01,Swargate,3,ECS002,Ventilation fan VFD fault
+SC-000044,2026-09-04 07:41:50,LVP-PMC,PMC,2,LVP602,LV panel under-voltage
+SC-000045,2026-09-04 09:45:05,ESC-MND-02,Mandai,3,ESC001,Escalator drive overload trip
+SC-000046,2026-09-04 13:16:52,RTU-BPT,Budhwar Peth,2,RTU001,RTU communication lost to station
+SC-000047,2026-09-04 13:29:49,UPS-BPT,Budhwar Peth,3,UPS505,UPS battery temperature high
+SC-000048,2026-09-04 13:31:43,LFT-DCG-01,Deccan Gymkhana,3,LFT002,Lift door fault
+SC-000049,2026-09-04 19:03:03,ESC-NLS-01,Nal Stop,3,ESC001,Escalator drive overload trip
+SC-000050,2026-09-04 19:28:52,ESC-SWG-02,Swargate,3,ESC001,Escalator drive overload trip
+SC-000051,2026-09-04 21:11:50,ESC-BPT-01,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000052,2026-09-04 21:22:23,TSS-01,,3,TSS703,Traction transformer temperature high
+SC-000053,2026-09-04 21:23:35,ECS-BPT-01,Budhwar Peth,3,ECS002,Ventilation fan VFD fault
+SC-000054,2026-09-04 21:55:57,ESC-MND-01,Mandai,3,ESC001,Escalator drive overload trip
+SC-000055,2026-09-05 10:15:46,ESC-RMW-01,Ramwadi,3,ESC001,Escalator drive overload trip
+SC-000056,2026-09-05 11:00:32,LFT-PMC-01,PMC,3,LFT002,Lift door fault
+SC-000057,2026-09-05 18:40:00,UPS-MND,Mandai,1,UPS503,UPS inverter fault
+SC-000058,2026-09-05 18:40:10,UPS-MND,Mandai,2,UPS504,UPS output voltage out of range
+SC-000059,2026-09-05 19:10:00,ESC-CVC-01,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000060,2026-09-05 20:51:47,ESC-CVC-01,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000061,2026-09-06 03:21:59,ECS-CVC-01,Civil Court,3,ECS002,Ventilation fan VFD fault
+SC-000062,2026-09-06 08:42:00,TSS-02,,3,TSS703,Traction transformer temperature high
+SC-000063,2026-09-06 09:24:00,TSS-02,,2,TSS702,OHE voltage dip below threshold
+SC-000064,2026-09-06 09:25:10,ESC-SWG-02,Swargate,3,ESC001,Escalator drive overload trip
+SC-000065,2026-09-06 09:39:00,LFT-VNZ-01,Vanaz,3,LFT002,Lift door fault
+SC-000066,2026-09-06 11:02:19,ECS-MND-01,Mandai,3,ECS002,Ventilation fan VFD fault
+SC-000067,2026-09-06 11:13:45,UPS-CVC,Civil Court,3,UPS505,UPS battery temperature high
+SC-000068,2026-09-06 15:04:14,UPS-MND,Mandai,3,UPS505,UPS battery temperature high
+SC-000069,2026-09-06 17:42:40,LFT-CVC-01,Civil Court,3,LFT002,Lift door fault
+SC-000070,2026-09-06 18:40:33,LFT-SJN-01,Shivajinagar,3,LFT002,Lift door fault
+SC-000071,2026-09-06 19:15:00,LVP-MND,Mandai,2,LVP602,LV panel under-voltage
+SC-000072,2026-09-06 19:15:56,ESC-MND-02,Mandai,3,ESC001,Escalator drive overload trip
+SC-000073,2026-09-06 19:16:40,ECS-MND-01,Mandai,3,ECS002,Ventilation fan VFD fault
+SC-000074,2026-09-06 19:17:48,LVP-MND,Mandai,2,LVP602,LV panel under-voltage
+SC-000075,2026-09-06 19:24:19,LFT-NLS-01,Nal Stop,3,LFT002,Lift door fault
+SC-000076,2026-09-06 22:02:00,RTU-SWG,Swargate,2,RTU001,RTU communication lost to station
+SC-000077,2026-09-07 07:27:39,ESC-SJN-02,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000078,2026-09-07 08:42:49,UPS-VNZ,Vanaz,3,UPS505,UPS battery temperature high
+SC-000079,2026-09-07 09:16:35,ESC-SJN-01,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000080,2026-09-07 09:20:50,LFT-PRS-01,Pune Railway Station,3,LFT002,Lift door fault
+SC-000081,2026-09-07 11:52:58,RTU-RMW,Ramwadi,2,RTU001,RTU communication lost to station
+SC-000082,2026-09-07 12:16:19,ESC-CVC-02,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000083,2026-09-07 12:49:00,ESC-SJN-02,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000084,2026-09-07 13:34:56,LFT-SWG-01,Swargate,3,LFT002,Lift door fault
+SC-000085,2026-09-07 14:09:55,ESC-SJN-02,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000086,2026-09-07 14:18:56,ESC-DCG-01,Deccan Gymkhana,3,ESC001,Escalator drive overload trip
+SC-000087,2026-09-07 15:24:00,LVP-DCG,Deccan Gymkhana,1,LVP601,LV panel incomer breaker trip
+SC-000088,2026-09-07 15:24:08,UPS-DCG,Deccan Gymkhana,3,UPS501,UPS mains failure - running on battery
+SC-000089,2026-09-07 15:24:10,LFT-DCG-01,Deccan Gymkhana,2,LFT001,Lift out of service - power loss
+SC-000090,2026-09-07 15:24:24,ESC-DCG-01,Deccan Gymkhana,2,ESC002,Escalator stopped - power loss
+SC-000091,2026-09-07 15:37:30,ESC-CVC-02,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000092,2026-09-07 15:41:00,ESC-BPT-02,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000093,2026-09-07 17:11:39,ESC-MND-02,Mandai,3,ESC001,Escalator drive overload trip
+SC-000094,2026-09-07 20:59:19,ESC-BPT-02,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000095,2026-09-08 09:03:00,TSS-03,,3,TSS703,Traction transformer temperature high
+SC-000096,2026-09-08 09:33:16,ESC-VNZ-01,Vanaz,3,ESC001,Escalator drive overload trip
+SC-000097,2026-09-08 09:43:00,TSS-03,,2,TSS702,OHE voltage dip below threshold
+SC-000098,2026-09-08 10:15:57,ESC-SWG-02,Swargate,3,ESC001,Escalator drive overload trip
+SC-000099,2026-09-08 10:23:12,LFT-BPT-01,Budhwar Peth,3,LFT002,Lift door fault
+SC-000100,2026-09-08 11:39:33,UPS-BPT,Budhwar Peth,3,UPS505,UPS battery temperature high
+SC-000101,2026-09-08 14:03:39,ESC-BPT-02,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000102,2026-09-08 15:36:54,ESC-VNZ-01,Vanaz,3,ESC001,Escalator drive overload trip
+SC-000103,2026-09-08 15:47:53,LVP-VNZ,Vanaz,2,LVP602,LV panel under-voltage
+SC-000104,2026-09-08 16:58:00,UPS-PRS,Pune Railway Station,3,UPS505,UPS battery temperature high
+SC-000105,2026-09-08 18:15:38,ESC-BPT-01,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000106,2026-09-08 20:43:18,ESC-DCG-01,Deccan Gymkhana,3,ESC001,Escalator drive overload trip
+SC-000107,2026-09-08 21:25:17,LFT-RMW-01,Ramwadi,3,LFT002,Lift door fault
+SC-000108,2026-09-09 01:32:57,LVP-PMC,PMC,2,LVP602,LV panel under-voltage
+SC-000109,2026-09-09 06:56:06,ECS-CVC-01,Civil Court,3,ECS002,Ventilation fan VFD fault
+SC-000110,2026-09-09 07:05:48,ESC-CVC-02,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000111,2026-09-09 09:14:44,LFT-RMW-01,Ramwadi,3,LFT002,Lift door fault
+SC-000112,2026-09-09 09:40:48,ESC-IDC-01,Ideal Colony,3,ESC001,Escalator drive overload trip
+SC-000113,2026-09-09 09:57:18,ESC-SWG-02,Swargate,3,ESC001,Escalator drive overload trip
+SC-000114,2026-09-09 14:02:36,ESC-NLS-01,Nal Stop,3,ESC001,Escalator drive overload trip
+SC-000115,2026-09-09 15:38:53,LFT-SWG-01,Swargate,3,LFT002,Lift door fault
+SC-000116,2026-09-09 20:31:00,LVP-MND,Mandai,2,LVP602,LV panel under-voltage
+SC-000117,2026-09-10 06:36:40,ESC-MND-02,Mandai,3,ESC001,Escalator drive overload trip
+SC-000118,2026-09-10 08:45:19,TSS-03,,3,TSS703,Traction transformer temperature high
+SC-000119,2026-09-10 11:48:19,ESC-RMW-01,Ramwadi,3,ESC001,Escalator drive overload trip
+SC-000120,2026-09-10 13:06:00,UPS-CVC,Civil Court,1,UPS503,UPS inverter fault
+SC-000121,2026-09-10 13:06:14,UPS-CVC,Civil Court,2,UPS504,UPS output voltage out of range
+SC-000122,2026-09-10 13:09:04,ESC-BPT-02,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000123,2026-09-10 14:53:55,ESC-NLS-01,Nal Stop,3,ESC001,Escalator drive overload trip
+SC-000124,2026-09-10 15:46:10,ESC-IDC-01,Ideal Colony,3,ESC001,Escalator drive overload trip
+SC-000125,2026-09-10 17:18:44,LVP-SJN,Shivajinagar,2,LVP602,LV panel under-voltage
+SC-000126,2026-09-10 19:23:02,LFT-PMC-01,PMC,3,LFT002,Lift door fault
+SC-000127,2026-09-10 21:57:06,ECS-SJN-01,Shivajinagar,3,ECS002,Ventilation fan VFD fault
+SC-000128,2026-09-11 07:26:21,LFT-RMW-01,Ramwadi,3,LFT002,Lift door fault
+SC-000129,2026-09-11 10:12:29,LVP-MND,Mandai,2,LVP602,LV panel under-voltage
+SC-000130,2026-09-11 12:56:19,LFT-CVC-01,Civil Court,3,LFT002,Lift door fault
+SC-000131,2026-09-11 13:46:37,LFT-PMC-01,PMC,3,LFT002,Lift door fault
+SC-000132,2026-09-11 15:29:20,LFT-DCG-01,Deccan Gymkhana,3,LFT002,Lift door fault
+SC-000133,2026-09-11 17:23:52,RTU-CVC,Civil Court,2,RTU001,RTU communication lost to station
+SC-000134,2026-09-11 18:02:51,ESC-SJN-02,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000135,2026-09-11 20:41:22,ESC-PMC-01,PMC,3,ESC001,Escalator drive overload trip
+SC-000136,2026-09-12 07:09:38,ESC-CVC-02,Civil Court,3,ESC001,Escalator drive overload trip
+SC-000137,2026-09-12 07:26:45,UPS-VNZ,Vanaz,3,UPS505,UPS battery temperature high
+SC-000138,2026-09-12 12:35:09,ESC-VNZ-01,Vanaz,3,ESC001,Escalator drive overload trip
+SC-000139,2026-09-12 15:54:40,ESC-BPT-02,Budhwar Peth,3,ESC001,Escalator drive overload trip
+SC-000140,2026-09-12 17:26:13,ECS-SWG-01,Swargate,3,ECS002,Ventilation fan VFD fault
+SC-000141,2026-09-12 19:56:07,ESC-MND-01,Mandai,3,ESC001,Escalator drive overload trip
+SC-000142,2026-09-12 20:20:49,ECS-BPT-01,Budhwar Peth,3,ECS002,Ventilation fan VFD fault
+SC-000143,2026-09-13 02:51:19,RTU-SJN,Shivajinagar,2,RTU001,RTU communication lost to station
+SC-000144,2026-09-13 06:17:05,ESC-MND-02,Mandai,3,ESC001,Escalator drive overload trip
+SC-000145,2026-09-13 07:58:32,ESC-PRS-01,Pune Railway Station,3,ESC001,Escalator drive overload trip
+SC-000146,2026-09-13 08:27:55,ESC-SJN-01,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000147,2026-09-13 14:25:44,LFT-MND-01,Mandai,3,LFT002,Lift door fault
+SC-000148,2026-09-13 15:32:51,LFT-SJN-01,Shivajinagar,3,LFT002,Lift door fault
+SC-000149,2026-09-13 15:47:33,LFT-BPT-01,Budhwar Peth,3,LFT002,Lift door fault
+SC-000150,2026-09-13 17:40:42,ESC-SJN-01,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000151,2026-09-13 18:01:06,ESC-MND-02,Mandai,3,ESC001,Escalator drive overload trip
+SC-000152,2026-09-13 18:43:00,UPS-SJN,Shivajinagar,3,UPS505,UPS battery temperature high
+SC-000153,2026-09-13 19:40:00,UPS-SJN,Shivajinagar,2,UPS502,UPS battery low
+SC-000154,2026-09-13 19:40:10,UPS-SJN,Shivajinagar,2,UPS504,UPS output voltage out of range
+SC-000155,2026-09-14 02:46:03,RTU-MND,Mandai,2,RTU001,RTU communication lost to station
+SC-000156,2026-09-14 06:53:10,ESC-SWG-01,Swargate,3,ESC001,Escalator drive overload trip
+SC-000157,2026-09-14 10:06:08,LFT-BPT-01,Budhwar Peth,3,LFT002,Lift door fault
+SC-000158,2026-09-14 11:50:15,LFT-NLS-01,Nal Stop,3,LFT002,Lift door fault
+SC-000159,2026-09-14 12:19:51,ESC-PRS-01,Pune Railway Station,3,ESC001,Escalator drive overload trip
+SC-000160,2026-09-14 12:52:19,ESC-SJN-02,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000161,2026-09-14 15:49:03,ESC-SJN-02,Shivajinagar,3,ESC001,Escalator drive overload trip
+SC-000162,2026-09-14 15:58:10,ESC-IDC-01,Ideal Colony,3,ESC001,Escalator drive overload trip
+SC-000163,2026-09-14 19:19:00,ESC-RMW-01,Ramwadi,3,ESC001,Escalator drive overload trip

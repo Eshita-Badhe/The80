@@ -1,0 +1,921 @@
+{
+ "meta": {
+  "seed": 42,
+  "period_start": "2026-09-01T00:00:00",
+  "period_end": "2026-09-15T00:00:00",
+  "timezone": "Asia/Kolkata (UTC+05:30)",
+  "labels": {
+   "ROOT_CAUSE": "Top-ranked cause should equal root_cause_equipment",
+   "INSUFFICIENT_EVIDENCE": "System must abstain and state what evidence is missing",
+   "LOW_CONFIDENCE_ROOT_CAUSE": "Abstain, or rank root_cause_equipment first with low confidence"
+  },
+  "ticket_visibility": "Ticket resolution_notes only become known at closed_at. When evaluating an incident, do not let the engine see resolutions of tickets closed after the incident's analysis time."
+ },
+ "incidents": [
+  {
+   "incident_id": "INC-01",
+   "scenario": "AMBIGUOUS_OVERLAP",
+   "variant": null,
+   "root_cause_equipment": null,
+   "root_cause_description": "PSD faults with two weak, unconfirmed candidates (UPS temperature warning, single ZC link blip) and no decisive evidence",
+   "expected_label": "INSUFFICIENT_EVIDENCE",
+   "difficulty": "hard",
+   "plausible_candidates": [
+    "UPS-SWG",
+    "ZC-03",
+    "PSD controller at SWG"
+   ],
+   "hidden_true_cause": "PSD controller firmware glitch (not observable in any log)",
+   "scoring_note": "System must abstain / report insufficient evidence and say what data would resolve it. Penalise high confidence in UPS or ZC.",
+   "start_time": "2026-09-02T08:13:00",
+   "end_time": "2026-09-02T08:28:00",
+   "affected_stations": [
+    "SWG"
+   ],
+   "events_by_role": {
+    "ambiguous": [
+     "CB-000012",
+     "SC-000017"
+    ],
+    "symptom": [
+     "CB-000013",
+     "CB-000014",
+     "CB-000015",
+     "CB-000016"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001013"
+   ]
+  },
+  {
+   "incident_id": "INC-02",
+   "scenario": "LV_PANEL_FAULT",
+   "variant": "trip",
+   "root_cause_equipment": "LVP-IDC",
+   "root_cause_description": "LV panel incomer breaker tripped on overload: station loses mains to AFC, escalators, lifts and ventilation",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "UPS501 'mains failure' (trip variant) is a symptom, not the root. PSD stays healthy because the UPS carries it.",
+   "start_time": "2026-09-02T17:15:37",
+   "end_time": "2026-09-02T17:28:37",
+   "affected_stations": [
+    "IDC"
+   ],
+   "events_by_role": {
+    "root": [
+     "SC-000022"
+    ],
+    "symptom": [
+     "AF-000062",
+     "AF-000063",
+     "SC-000023",
+     "SC-000024",
+     "SC-000025"
+    ],
+    "red_herring": [
+     "SC-000026",
+     "TC-000060"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001018"
+   ]
+  },
+  {
+   "incident_id": "INC-03",
+   "scenario": "TRACTION_SUPPLY_FAULT",
+   "variant": "breaker",
+   "root_cause_equipment": "TSS-01",
+   "root_cause_description": "Traction feeder breaker tripped on protection relay operation; section de-energised",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Several unrelated trains report power problems at the same time: shared upstream supply.",
+   "start_time": "2026-09-03T07:19:00",
+   "end_time": "2026-09-03T07:33:55",
+   "affected_stations": [
+    "DCG",
+    "IDC",
+    "NLS",
+    "VNZ"
+   ],
+   "events_by_role": {
+    "root": [
+     "SC-000028"
+    ],
+    "symptom": [
+     "CB-000028",
+     "CB-000029",
+     "CB-000030",
+     "SC-000029",
+     "TC-000073",
+     "TC-000074",
+     "TC-000075",
+     "TC-000076",
+     "TC-000077",
+     "TC-000078",
+     "TC-000079",
+     "TC-000080"
+    ],
+    "red_herring": [
+     "AF-000086",
+     "AF-000087"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001022"
+   ]
+  },
+  {
+   "incident_id": "INC-04",
+   "scenario": "UPS_FAILURE",
+   "variant": "battery",
+   "root_cause_equipment": "UPS-BPT",
+   "root_cause_description": "UPS battery bank degraded: high battery temperature, then low battery and loss of PSD supply",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "PSD/CBTC alarms are downstream symptoms; root is the station UPS.",
+   "start_time": "2026-09-03T11:30:00",
+   "end_time": "2026-09-03T12:31:00",
+   "affected_stations": [
+    "BPT"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "SC-000031"
+    ],
+    "root": [
+     "SC-000032"
+    ],
+    "symptom": [
+     "CB-000031",
+     "CB-000032",
+     "CB-000033",
+     "CB-000034",
+     "CB-000035",
+     "CB-000036",
+     "CB-000037",
+     "CB-000038",
+     "CB-000039",
+     "CB-000040",
+     "CB-000041",
+     "CB-000042",
+     "CB-000043",
+     "CB-000044",
+     "CB-000045",
+     "CB-000046",
+     "CB-000047",
+     "SC-000033"
+    ],
+    "red_herring": [
+     "AF-000098",
+     "SC-000034"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001026"
+   ]
+  },
+  {
+   "incident_id": "INC-05",
+   "scenario": "AMBIGUOUS_OVERLAP",
+   "variant": null,
+   "root_cause_equipment": null,
+   "root_cause_description": "PSD faults with two weak, unconfirmed candidates (UPS temperature warning, single ZC link blip) and no decisive evidence",
+   "expected_label": "INSUFFICIENT_EVIDENCE",
+   "difficulty": "hard",
+   "plausible_candidates": [
+    "UPS-SJN",
+    "ZC-02",
+    "PSD controller at SJN"
+   ],
+   "hidden_true_cause": "PSD controller firmware glitch (not observable in any log)",
+   "scoring_note": "System must abstain / report insufficient evidence and say what data would resolve it. Penalise high confidence in UPS or ZC.",
+   "start_time": "2026-09-03T19:26:00",
+   "end_time": "2026-09-03T19:44:00",
+   "affected_stations": [
+    "SJN"
+   ],
+   "events_by_role": {
+    "ambiguous": [
+     "CB-000051",
+     "SC-000042"
+    ],
+    "symptom": [
+     "CB-000053",
+     "CB-000054",
+     "CB-000055",
+     "CB-000056"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001031"
+   ]
+  },
+  {
+   "incident_id": "INC-06",
+   "scenario": "AMBIGUOUS_MISSING_LOGS",
+   "variant": null,
+   "root_cause_equipment": "UPS-BPT",
+   "root_cause_description": "UPS inverter failure whose SCADA events and telemetry were lost (RTU link down)",
+   "expected_label": "LOW_CONFIDENCE_ROOT_CAUSE",
+   "difficulty": "hard",
+   "plausible_candidates": [
+    "UPS-BPT",
+    "LVP-BPT"
+   ],
+   "hidden_true_cause": "UPS-BPT",
+   "scoring_note": "Full credit if the system abstains OR ranks the UPS first with LOW confidence and flags the RTU/log gap. AFC logs show no gate outage, which argues against the LV panel. Penalise high confidence in anything else.",
+   "start_time": "2026-09-04T13:16:52",
+   "end_time": "2026-09-04T13:27:00",
+   "affected_stations": [
+    "BPT"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "SC-000046"
+    ],
+    "symptom": [
+     "CB-000062",
+     "CB-000063",
+     "CB-000064",
+     "CB-000065",
+     "CB-000066",
+     "CB-000067",
+     "CB-000068",
+     "CB-000069"
+    ]
+   },
+   "hidden_events_not_in_logs": [
+    {
+     "time": "2026-09-04T13:17:00",
+     "alarm_code": "UPS503",
+     "equipment_id": "UPS-BPT"
+    },
+    {
+     "time": "2026-09-04T13:17:09",
+     "alarm_code": "UPS504",
+     "equipment_id": "UPS-BPT"
+    }
+   ],
+   "ticket_ids": [
+    "TKT-001035"
+   ]
+  },
+  {
+   "incident_id": "INC-07",
+   "scenario": "RECURRING_DOOR_SENSOR",
+   "variant": "1",
+   "root_cause_equipment": "TR03-D4",
+   "root_cause_description": "Faulty door obstacle-detection sensor on TR03 D4 causing repeated false obstruction alarms (occurrence 1)",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Single train, single door; recurrence across days is the key pattern. Systemic (power/CBTC) causes should be rejected.",
+   "start_time": "2026-09-04T15:07:00",
+   "end_time": "2026-09-04T19:22:00",
+   "affected_stations": [
+    "CVC",
+    "MND",
+    "SJN",
+    "SWG"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "TC-000118",
+     "TC-000120",
+     "TC-000122"
+    ],
+    "root": [
+     "TC-000130"
+    ],
+    "symptom": [
+     "CB-000073",
+     "CB-000074",
+     "CB-000075",
+     "TC-000131",
+     "TC-000132",
+     "TC-000133",
+     "TC-000134",
+     "TC-000135",
+     "TC-000136"
+    ],
+    "red_herring": [
+     "CB-000071",
+     "TC-000129"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001039"
+   ]
+  },
+  {
+   "incident_id": "INC-08",
+   "scenario": "UPS_FAILURE",
+   "variant": "inverter",
+   "root_cause_equipment": "UPS-MND",
+   "root_cause_description": "UPS inverter fault: loss of regulated output to PSD supply",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "easy",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "PSD/CBTC alarms are downstream symptoms; root is the station UPS.",
+   "start_time": "2026-09-05T18:39:52",
+   "end_time": "2026-09-05T18:50:22",
+   "affected_stations": [
+    "MND"
+   ],
+   "events_by_role": {
+    "root": [
+     "SC-000057"
+    ],
+    "symptom": [
+     "CB-000091",
+     "CB-000092",
+     "CB-000093",
+     "CB-000094",
+     "CB-000095",
+     "CB-000096",
+     "CB-000097",
+     "CB-000098",
+     "CB-000099",
+     "CB-000100",
+     "CB-000101",
+     "CB-000102",
+     "CB-000103",
+     "CB-000104",
+     "CB-000105",
+     "CB-000106",
+     "SC-000058"
+    ],
+    "red_herring": [
+     "TC-000163",
+     "TC-000165"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001053"
+   ]
+  },
+  {
+   "incident_id": "INC-09",
+   "scenario": "TRACTION_SUPPLY_FAULT",
+   "variant": "dip",
+   "root_cause_equipment": "TSS-02",
+   "root_cause_description": "Traction transformer overheating led to an OHE voltage dip across the feeding section",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Several unrelated trains report power problems at the same time: shared upstream supply.",
+   "start_time": "2026-09-06T08:42:00",
+   "end_time": "2026-09-06T09:39:00",
+   "affected_stations": [
+    "CVC",
+    "SJN"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "SC-000062"
+    ],
+    "root": [
+     "SC-000063"
+    ],
+    "symptom": [
+     "CB-000116",
+     "CB-000117",
+     "TC-000183",
+     "TC-000184",
+     "TC-000185",
+     "TC-000186",
+     "TC-000187"
+    ],
+    "red_herring": [
+     "SC-000064",
+     "SC-000065"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001058"
+   ]
+  },
+  {
+   "incident_id": "INC-10",
+   "scenario": "LV_PANEL_FAULT",
+   "variant": "undervolt",
+   "root_cause_equipment": "LVP-MND",
+   "root_cause_description": "LV panel sustained under-voltage (supply sag) causing marginal operation of gates, escalator drives and fan VFDs",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "hard",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "UPS501 'mains failure' (trip variant) is a symptom, not the root. PSD stays healthy because the UPS carries it.",
+   "start_time": "2026-09-06T19:15:00",
+   "end_time": "2026-09-06T19:28:17",
+   "affected_stations": [
+    "MND"
+   ],
+   "events_by_role": {
+    "root": [
+     "SC-000071"
+    ],
+    "supporting": [
+     "SC-000074"
+    ],
+    "symptom": [
+     "AF-000227",
+     "AF-000228",
+     "AF-000229",
+     "AF-000230",
+     "SC-000072",
+     "SC-000073"
+    ],
+    "red_herring": [
+     "SC-000075",
+     "TC-000208"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001064"
+   ]
+  },
+  {
+   "incident_id": "INC-11",
+   "scenario": "LV_PANEL_FAULT",
+   "variant": "trip",
+   "root_cause_equipment": "LVP-DCG",
+   "root_cause_description": "LV panel incomer breaker tripped on overload: station loses mains to AFC, escalators, lifts and ventilation",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "UPS501 'mains failure' (trip variant) is a symptom, not the root. PSD stays healthy because the UPS carries it.",
+   "start_time": "2026-09-07T15:24:00",
+   "end_time": "2026-09-07T15:37:30",
+   "affected_stations": [
+    "DCG"
+   ],
+   "events_by_role": {
+    "root": [
+     "SC-000087"
+    ],
+    "symptom": [
+     "AF-000268",
+     "AF-000269",
+     "SC-000088",
+     "SC-000089",
+     "SC-000090"
+    ],
+    "red_herring": [
+     "SC-000091",
+     "TC-000239"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001073"
+   ]
+  },
+  {
+   "incident_id": "INC-12",
+   "scenario": "TRACTION_SUPPLY_FAULT",
+   "variant": "dip",
+   "root_cause_equipment": "TSS-03",
+   "root_cause_description": "Traction transformer overheating led to an OHE voltage dip across the feeding section",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Several unrelated trains report power problems at the same time: shared upstream supply.",
+   "start_time": "2026-09-08T09:03:00",
+   "end_time": "2026-09-08T09:57:00",
+   "affected_stations": [
+    "BPT",
+    "MND",
+    "PRS",
+    "RMW",
+    "SWG"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "SC-000095"
+    ],
+    "root": [
+     "SC-000097"
+    ],
+    "symptom": [
+     "CB-000137",
+     "CB-000138",
+     "TC-000258",
+     "TC-000259",
+     "TC-000260",
+     "TC-000261",
+     "TC-000262",
+     "TC-000263"
+    ],
+    "red_herring": [
+     "CB-000136",
+     "SC-000096"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001078"
+   ]
+  },
+  {
+   "incident_id": "INC-13",
+   "scenario": "ZONE_CONTROLLER_FAULT",
+   "variant": "link_loss",
+   "root_cause_equipment": "ZC-01",
+   "root_cause_description": "Zone controller wayside radio link lost: radio unit failure in the zone",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Multiple trains and stations degrade together; look for the shared upstream controller.",
+   "start_time": "2026-09-08T13:44:10",
+   "end_time": "2026-09-08T14:03:39",
+   "affected_stations": [
+    "NLS",
+    "VNZ"
+   ],
+   "events_by_role": {
+    "root": [
+     "CB-000140"
+    ],
+    "supporting": [
+     "CB-000141"
+    ],
+    "symptom": [
+     "CB-000142",
+     "CB-000143",
+     "CB-000144",
+     "CB-000145"
+    ],
+    "red_herring": [
+     "AF-000307",
+     "SC-000101"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001079"
+   ]
+  },
+  {
+   "incident_id": "INC-14",
+   "scenario": "ZONE_CONTROLLER_FAULT",
+   "variant": "vital_seq",
+   "root_cause_equipment": "ZC-04",
+   "root_cause_description": "Zone controller vital sequencing error after software fault; hot-standby unit took over late",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Multiple trains and stations degrade together; look for the shared upstream controller.",
+   "start_time": "2026-09-09T09:04:00",
+   "end_time": "2026-09-09T09:16:28",
+   "affected_stations": [
+    "DCG",
+    "PRS",
+    "RMW"
+   ],
+   "events_by_role": {
+    "root": [
+     "CB-000157"
+    ],
+    "supporting": [
+     "CB-000158"
+    ],
+    "symptom": [
+     "CB-000159",
+     "CB-000160",
+     "CB-000161",
+     "CB-000162"
+    ],
+    "red_herring": [
+     "SC-000111",
+     "TC-000302"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001089"
+   ]
+  },
+  {
+   "incident_id": "INC-15",
+   "scenario": "RECURRING_DOOR_SENSOR",
+   "variant": "2",
+   "root_cause_equipment": "TR03-D4",
+   "root_cause_description": "Faulty door obstacle-detection sensor on TR03 D4 causing repeated false obstruction alarms (occurrence 2)",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Single train, single door; recurrence across days is the key pattern. Systemic (power/CBTC) causes should be rejected.",
+   "start_time": "2026-09-09T11:09:00",
+   "end_time": "2026-09-09T15:06:00",
+   "affected_stations": [
+    "BPT",
+    "CVC",
+    "MND",
+    "SJN",
+    "SWG"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "TC-000304",
+     "TC-000307",
+     "TC-000312"
+    ],
+    "root": [
+     "TC-000318"
+    ],
+    "symptom": [
+     "CB-000165",
+     "CB-000168",
+     "TC-000320",
+     "TC-000321",
+     "TC-000322",
+     "TC-000323",
+     "TC-000324",
+     "TC-000325",
+     "TC-000326"
+    ],
+    "red_herring": [
+     "CB-000167",
+     "TC-000317"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001093"
+   ]
+  },
+  {
+   "incident_id": "INC-16",
+   "scenario": "RECURRING_DOOR_SENSOR",
+   "variant": "3",
+   "root_cause_equipment": "TR03-D4",
+   "root_cause_description": "Faulty door obstacle-detection sensor on TR03 D4 causing repeated false obstruction alarms (occurrence 3)",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "easy",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Single train, single door; recurrence across days is the key pattern. Systemic (power/CBTC) causes should be rejected.",
+   "start_time": "2026-09-10T06:01:00",
+   "end_time": "2026-09-10T09:36:00",
+   "affected_stations": [
+    "BPT",
+    "CVC",
+    "MND",
+    "SJN",
+    "SWG"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "TC-000339",
+     "TC-000345",
+     "TC-000346"
+    ],
+    "root": [
+     "TC-000348"
+    ],
+    "symptom": [
+     "CB-000177",
+     "CB-000178",
+     "TC-000351",
+     "TC-000352",
+     "TC-000354",
+     "TC-000355",
+     "TC-000356",
+     "TC-000357",
+     "TC-000358"
+    ],
+    "red_herring": [
+     "CB-000175",
+     "TC-000350"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001099"
+   ]
+  },
+  {
+   "incident_id": "INC-17",
+   "scenario": "UPS_FAILURE",
+   "variant": "inverter",
+   "root_cause_equipment": "UPS-CVC",
+   "root_cause_description": "UPS inverter fault: loss of regulated output to PSD supply",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "easy",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "PSD/CBTC alarms are downstream symptoms; root is the station UPS.",
+   "start_time": "2026-09-10T12:57:12",
+   "end_time": "2026-09-10T13:13:00",
+   "affected_stations": [
+    "CVC"
+   ],
+   "events_by_role": {
+    "root": [
+     "SC-000120"
+    ],
+    "symptom": [
+     "CB-000180",
+     "CB-000181",
+     "CB-000182",
+     "CB-000183",
+     "CB-000184",
+     "CB-000185",
+     "CB-000186",
+     "CB-000187",
+     "CB-000188",
+     "CB-000189",
+     "CB-000190",
+     "CB-000191",
+     "CB-000192",
+     "SC-000121"
+    ],
+    "red_herring": [
+     "AF-000380",
+     "SC-000122"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001102"
+   ]
+  },
+  {
+   "incident_id": "INC-18",
+   "scenario": "AMBIGUOUS_MISSING_LOGS",
+   "variant": null,
+   "root_cause_equipment": "UPS-CVC",
+   "root_cause_description": "UPS inverter failure whose SCADA events and telemetry were lost (RTU link down)",
+   "expected_label": "LOW_CONFIDENCE_ROOT_CAUSE",
+   "difficulty": "hard",
+   "plausible_candidates": [
+    "UPS-CVC",
+    "LVP-CVC"
+   ],
+   "hidden_true_cause": "UPS-CVC",
+   "scoring_note": "Full credit if the system abstains OR ranks the UPS first with LOW confidence and flags the RTU/log gap. AFC logs show no gate outage, which argues against the LV panel. Penalise high confidence in anything else.",
+   "start_time": "2026-09-11T17:23:52",
+   "end_time": "2026-09-11T17:34:00",
+   "affected_stations": [
+    "CVC"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "SC-000133"
+    ],
+    "symptom": [
+     "CB-000200",
+     "CB-000201",
+     "CB-000202",
+     "CB-000203",
+     "CB-000204",
+     "CB-000205",
+     "CB-000206",
+     "CB-000207",
+     "CB-000208"
+    ]
+   },
+   "hidden_events_not_in_logs": [
+    {
+     "time": "2026-09-11T17:24:00",
+     "alarm_code": "UPS503",
+     "equipment_id": "UPS-CVC"
+    },
+    {
+     "time": "2026-09-11T17:24:09",
+     "alarm_code": "UPS504",
+     "equipment_id": "UPS-CVC"
+    }
+   ],
+   "ticket_ids": [
+    "TKT-001116"
+   ]
+  },
+  {
+   "incident_id": "INC-19",
+   "scenario": "ZONE_CONTROLLER_FAULT",
+   "variant": "vital_seq",
+   "root_cause_equipment": "ZC-02",
+   "root_cause_description": "Zone controller vital sequencing error after software fault; hot-standby unit took over late",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "Multiple trains and stations degrade together; look for the shared upstream controller.",
+   "start_time": "2026-09-13T07:58:32",
+   "end_time": "2026-09-13T08:20:00",
+   "affected_stations": [
+    "CVC",
+    "DCG",
+    "PMC",
+    "SJN",
+    "SWG"
+   ],
+   "events_by_role": {
+    "root": [
+     "CB-000224"
+    ],
+    "supporting": [
+     "CB-000225"
+    ],
+    "symptom": [
+     "CB-000226",
+     "CB-000227",
+     "CB-000228",
+     "CB-000229",
+     "CB-000230",
+     "CB-000231",
+     "CB-000232",
+     "CB-000233",
+     "CB-000234",
+     "CB-000235"
+    ],
+    "red_herring": [
+     "AF-000487",
+     "SC-000145"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001137"
+   ]
+  },
+  {
+   "incident_id": "INC-20",
+   "scenario": "UPS_FAILURE",
+   "variant": "battery",
+   "root_cause_equipment": "UPS-SJN",
+   "root_cause_description": "UPS battery bank degraded: high battery temperature, then low battery and loss of PSD supply",
+   "expected_label": "ROOT_CAUSE",
+   "difficulty": "medium",
+   "plausible_candidates": [],
+   "hidden_true_cause": null,
+   "scoring_note": "PSD/CBTC alarms are downstream symptoms; root is the station UPS.",
+   "start_time": "2026-09-13T18:43:00",
+   "end_time": "2026-09-13T19:51:00",
+   "affected_stations": [
+    "SJN"
+   ],
+   "events_by_role": {
+    "supporting": [
+     "SC-000152"
+    ],
+    "root": [
+     "SC-000153"
+    ],
+    "symptom": [
+     "CB-000245",
+     "CB-000246",
+     "CB-000247",
+     "CB-000248",
+     "CB-000249",
+     "CB-000250",
+     "CB-000251",
+     "CB-000252",
+     "CB-000253",
+     "CB-000254",
+     "CB-000255",
+     "CB-000256",
+     "CB-000257",
+     "CB-000258",
+     "CB-000259",
+     "SC-000154"
+    ],
+    "red_herring": [
+     "TC-000476",
+     "TC-000478"
+    ]
+   },
+   "hidden_events_not_in_logs": [],
+   "ticket_ids": [
+    "TKT-001144"
+   ]
+  }
+ ]
+}
