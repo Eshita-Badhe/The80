@@ -164,13 +164,38 @@ Open <http://127.0.0.1:8000>. FastAPI's interactive API documentation is at <htt
 
 ### Optional OpenAI setup
 
-To enable OpenAI AI investigation, open `The80/.env` and replace the placeholder `OPENAI_API_KEY` with your OpenAI API key. `OPENAI_MODEL` defaults to `gpt-4o-mini`; set it to a model available to your OpenAI API project if needed. Never put the key in frontend files, HTML, JavaScript, or browser environment variables. The backend sends only the selected incident's bounded evidence context to OpenAI when you request a review, explanation, or chat response.
+To enable OpenAI AI investigation and voice, create `The80/.env` from `.env.example` and replace the placeholder `OPENAI_API_KEY` with an API key from your OpenAI API project. `OPENAI_MODEL` defaults to `gpt-4o-mini`; set it to a model available to your project if needed. Never put the key in frontend files, HTML, JavaScript, or browser environment variables. The backend sends bounded investigation context to OpenAI when you request an AI response.
 
 - `GET /api/ai/status` checks the configured model against OpenAI and reports online only when the credentials and model are accepted.
 - `POST /api/ai/chat` answers using bounded context from current incidents, anomalies, and telemetry.
 - `POST /api/ai/explain` generates an advisory incident explanation.
 - `POST /api/ai/verify` returns structured advisory evidence review JSON.
 - `POST /api/ai/voice/connect?incident_id=...` creates a backend-authorized Realtime WebRTC session from an SDP offer and returns the SDP answer.
+
+#### Voice agent
+
+The assistant panel includes a microphone mode for spoken incident investigation. It connects the browser to OpenAI Realtime using WebRTC; the browser sends its SDP offer to the MetroPulse backend, and the backend uses `OPENAI_API_KEY` to create the session. The permanent API key is not sent to the browser. The session receives the selected incident's bounded evidence context and can call MetroPulse's existing AI investigation endpoint for current record questions.
+
+Default voice configuration:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `OPENAI_REALTIME_MODEL` | `gpt-realtime-2.1` | OpenAI Realtime speech model; must be available to the API project |
+| `OPENAI_REALTIME_VOICE` | `marin` | Voice used for generated speech |
+
+The voice agent speaks Hindi by default and is instructed to answer in English when the user speaks English or asks for English; it can handle Hinglish. It presents evidence as advisory and must not claim that a root cause is confirmed. It does not operate metro equipment.
+
+To use voice:
+
+1. Add a valid `OPENAI_API_KEY` to the backend `.env` file. Keep the key private and do not commit `.env`.
+2. Start or restart the backend from the repository root with `python -m uvicorn backend.main:app --reload`.
+3. Open `http://127.0.0.1:8000`, open the MetroPulse AI assistant, and select the microphone button.
+4. Allow microphone access in the browser. The app must be served from `localhost` or HTTPS for browser microphone access.
+5. Ask a question about the selected incident. Use the controls to mute the microphone, end the session, or return to text chat.
+
+If the assistant reports **AI unavailable**, check `http://127.0.0.1:8000/api/ai/status`. Voice requires `configured: true` and `available: true`. Confirm that the key is in `.env` (not only `.env.example`), that it belongs to an API project with access to the configured models, and that the backend was restarted after editing `.env`. The voice model and voice can be changed with the two `OPENAI_REALTIME_*` variables above. Realtime usage may incur API charges under the OpenAI API project's billing and limits.
+
+The voice connection and evidence-review request have automated backend tests. Those tests mock OpenAI and do not check real microphone permissions, network connectivity to OpenAI, or spoken-language pronunciation.
 
 ```powershell
 Copy-Item .env.example .env
@@ -182,6 +207,8 @@ Edit `.env` locally and replace the placeholder with a key from your OpenAI acco
 | --- | --- | --- |
 | `OPENAI_API_KEY` | unset | Server-side credential for optional OpenAI requests |
 | `OPENAI_MODEL` | `gpt-4o-mini` | Model ID sent to OpenAI; must be enabled for the key |
+| `OPENAI_REALTIME_MODEL` | `gpt-realtime-2.1` | Realtime speech model for the voice agent |
+| `OPENAI_REALTIME_VOICE` | `marin` | Generated voice for the voice agent |
 
 ## Run the CLI pipeline
 
