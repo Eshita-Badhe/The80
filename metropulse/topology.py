@@ -64,6 +64,19 @@ class Topology:
                     queue.append(parent)
         return result
 
+    def ancestors_within(self, equipment_id: str, max_depth: int = 3) -> set[str]:
+        result: set[str] = set()
+        queue = deque([(equipment_id, 0)])
+        while queue:
+            node, depth = queue.popleft()
+            if depth >= max_depth:
+                continue
+            for parent in sorted(self._parents.get(node, ())):
+                if parent not in result:
+                    result.add(parent)
+                    queue.append((parent, depth + 1))
+        return result
+
     def descendants(self, equipment_id: str) -> set[str]:
         result: set[str] = set()
         queue = deque([equipment_id])

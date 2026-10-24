@@ -153,3 +153,5 @@ def parse_telemetry(path: str | Path) -> tuple[list[TelemetryPoint], list[REJECT
             except (KeyError, ValueError) as exc:
                 rejects.append({"line": line_number, "reason": str(exc), "raw": row})
     return points, rejects
+
+
