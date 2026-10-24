@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="380" viewBox="0 0 1440 380" role="img" aria-labelledby="title desc">
+  <title id="title">MetroPulse by The80</title>
+  <desc id="desc">Every Signal Tells a Story. A navy and violet metro infrastructure scene with cyan signal paths and station nodes.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080c1c"/>
+      <stop offset=".56" stop-color="#17142e"/>
+      <stop offset="1" stop-color="#101b31"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="45%" r="55%">
+      <stop offset="0" stop-color="#6743b6" stop-opacity=".33"/>
+      <stop offset="1" stop-color="#6743b6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="route" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#45e8dd" stop-opacity=".12"/>
+      <stop offset=".52" stop-color="#45e8dd"/>
+      <stop offset="1" stop-color="#a28aff"/>
+    </linearGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#a3b4e2" stroke-opacity=".055" stroke-width="1"/>
+    </pattern>
+    <filter id="soft" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="380" rx="22" fill="url(#bg)"/>
+  <rect width="1440" height="380" rx="22" fill="url(#glow)"/>
+  <rect width="1440" height="380" rx="22" fill="url(#grid)"/>
+  <g fill="none" stroke="#8da1d1" stroke-opacity=".18" stroke-width="1">
+    <path d="M640 38 760 112 900 62 1018 145 1176 82 1320 154"/>
+    <path d="M622 310 760 228 884 289 1018 202 1156 265 1324 196"/>
+    <path d="M900 62 884 289M1176 82 1156 265M760 112 760 228"/>
+  </g>
+  <path d="M634 278H770L842 220H1018L1080 168H1320" fill="none" stroke="url(#route)" stroke-width="4"/>
+  <path d="M634 278H770L842 220H1018L1080 168H1320" fill="none" stroke="#45e8dd" stroke-opacity=".48" stroke-width="15" filter="url(#soft)"/>
+  <g fill="#101a30" stroke="#5df1e5" stroke-width="3">
+    <circle cx="770" cy="278" r="8"/><circle cx="842" cy="220" r="8"/><circle cx="1018" cy="220" r="8"/><circle cx="1080" cy="168" r="8"/><circle cx="1250" cy="168" r="8"/>
+  </g>
+  <g fill="#8ea1d3" fill-opacity=".6">
+    <circle cx="640" cy="38" r="3"/><circle cx="760" cy="112" r="3"/><circle cx="900" cy="62" r="3"/><circle cx="1176" cy="82" r="3"/><circle cx="1320" cy="154" r="3"/>
+    <circle cx="622" cy="310" r="3"/><circle cx="884" cy="289" r="3"/><circle cx="1156" cy="265" r="3"/><circle cx="1324" cy="196" r="3"/>
+  </g>
+  <g transform="translate(86 88)">
+    <rect x="0" y="0" width="48" height="48" rx="14" fill="#252044" stroke="#8d72e9"/>
+    <path d="M15 28V20m9 13V15m9 13v-8" stroke="#50e8dd" stroke-width="4" stroke-linecap="round"/>
+    <text x="64" y="19" fill="#67e9e1" font-family="ui-monospace,monospace" font-size="12" letter-spacing="3">THE80 · INFRASTRUCTURE INTELLIGENCE</text>
+    <text x="0" y="126" fill="#f5f5ff" font-family="ui-sans-serif,system-ui,sans-serif" font-size="54" font-weight="750" letter-spacing="-2">MetroPulse <tspan fill="#aa93ff">by The80</tspan></text>
+    <text x="2" y="171" fill="#b4bed9" font-family="ui-sans-serif,system-ui,sans-serif" font-size="25" font-weight="500">Every Signal Tells a Story.</text>
+    <path d="M2 202H82" stroke="#4be7dd" stroke-width="3"/>
+    <text x="2" y="231" fill="#8190b5" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">SIMULATED METRO INCIDENT INTELLIGENCE</text>
+  </g>
+  <g transform="translate(1168 310)">
+    <circle r="5" fill="#50e8dd"/>
+    <circle r="12" fill="none" stroke="#50e8dd" stroke-opacity=".3"/>
+    <text x="23" y="4" fill="#8c9bbb" font-family="ui-monospace,monospace" font-size="11" letter-spacing="2">SIGNAL NETWORK · DEMO</text>
+  </g>
+</svg>

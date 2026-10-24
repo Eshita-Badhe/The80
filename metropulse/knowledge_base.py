@@ -39,3 +39,24 @@ ALARM_CODES = {
 
 NOISE_CODES = {code for code, item in ALARM_CODES.items() if item["role"] == "noise"}
 
+# Parent equipment patterns used by the deterministic root-cause scorer.
+# Generic communication and obstruction alarms deliberately cast no vote.
+FAILURE_PATTERNS = {
+    "PSD405": {"node_types": ["ups", "lv_panel"]},
+    "PSD404": {"node_types": ["zone_controller"]},
+    "ATP201": {"node_types": ["zone_controller"]},
+    "ATP205": {"node_types": ["zone_controller"]},
+    "TCM810": {"node_types": ["traction_substation"]},
+    "TCM811": {"node_types": ["traction_substation"]},
+    "AFC901": {"node_types": ["lv_panel"]},
+    "ESC002": {"node_types": ["lv_panel"]},
+    "LFT001": {"node_types": ["lv_panel"]},
+    "ECS001": {"node_types": ["lv_panel"]},
+    "PSD402": {"node_types": []},
+    "PSD403": {"node_types": []},
+    "HDW301": {"node_types": []},
+    "AFC902": {"node_types": []},
+    "TCM802": {"node_types": []},
+    "TCM803": {"node_types": []},
+}
+
