@@ -1,9 +1,9 @@
 from __future__ import annotations
-import csv, io, json, os, re, time
+import asyncio, csv, io, json, os, re, time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from fastapi import FastAPI, File, HTTPException, Request, UploadFile
+from fastapi import FastAPI, File, HTTPException, Query, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
@@ -11,7 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from backend.services.data_generator import STATIONS, SCENARIOS, baseline_dataset, generate_scenario
 from backend.services.processor import THRESHOLDS, process_records
-from backend.services.openai_ai import AIProviderError, answer_investigation_question, configuration as openai_configuration, explain_root_cause, provider_status, verify_incident_evidence
+from backend.services.openai_ai import AIProviderError, answer_investigation_question, configuration as openai_configuration, create_realtime_call, explain_root_cause, provider_status, verify_incident_evidence
 
 try:
     from dotenv import load_dotenv
@@ -58,6 +58,10 @@ def ai_call(function, *args):
         raise HTTPException(exc.status_code, detail=str(exc)) from None
 
 def check_ai_rate_limit(request: Request):
+    origin = request.headers.get("origin")
+    host = request.headers.get("host")
+    if origin and host and origin.rstrip("/") != f"{request.url.scheme}://{host}".rstrip("/"):
+        raise HTTPException(403, detail="AI request origin is not allowed")
     now = time.monotonic()
     address = request.client.host if request.client else "unknown"
     recent = [stamp for stamp in ai_requests.get(address, []) if now - stamp < 60]
@@ -169,6 +173,30 @@ def ai_chat(payload: AIChatRequest, request: Request):
     answer = ai_call(answer_investigation_question, message, context, history_items)
     selected_incident = context.get("selected_incident", {}).get("incident", {}).get("incident_id")
     return {"answer": answer, "incident_id": selected_incident or payload.incident_id, "simulated": True, "provider": "OpenAI"}
+
+@app.post("/api/ai/voice/connect")
+async def ai_voice_connect(request: Request, incident_id: str | None = Query(default=None, max_length=100)):
+    """Proxy SDP offer to OpenAI so the permanent API key stays on this server."""
+    check_ai_rate_limit(request)
+    if not request.headers.get("content-type", "").lower().startswith("application/sdp"):
+        raise HTTPException(415, detail="Expected a WebRTC SDP offer")
+    length = request.headers.get("content-length")
+    if length and (not length.isdigit() or int(length) > 131072):
+        raise HTTPException(413, detail="WebRTC offer is too large")
+    payload = bytearray()
+    async for chunk in request.stream():
+        payload.extend(chunk)
+        if len(payload) > 131072:
+            raise HTTPException(413, detail="WebRTC offer is too large")
+    sdp_offer = payload.decode("utf-8", errors="replace").strip()
+    if not sdp_offer or len(sdp_offer) > 131072 or not sdp_offer.startswith("v=0"):
+        raise HTTPException(400, detail="A valid WebRTC SDP offer is required")
+    context = incident_ai_context(incident_id) if incident_id and incident_id.strip() else relevant_chat_context("", None)
+    try:
+        answer = await asyncio.to_thread(create_realtime_call, sdp_offer, context)
+    except AIProviderError as exc:
+        raise HTTPException(exc.status_code, detail=str(exc)) from None
+    return Response(content=answer, media_type="application/sdp", headers={"Cache-Control": "no-store"})
 
 @app.post("/api/ai/explain")
 def ai_explain(payload: AIIncidentRequest, request: Request):

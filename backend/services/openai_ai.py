@@ -3,12 +3,15 @@ from __future__ import annotations
 
 import json
 import os
+import uuid
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 OPENAI_BASE_URL = "https://api.openai.com/v1"
 DEFAULT_MODEL = "gpt-4o-mini"
+DEFAULT_REALTIME_MODEL = "gpt-realtime-2.1"
+DEFAULT_REALTIME_VOICE = "marin"
 
 
 class AIProviderError(Exception):
@@ -21,16 +24,97 @@ def configuration() -> tuple[str | None, str]:
     return os.getenv("OPENAI_API_KEY", "").strip() or None, os.getenv("OPENAI_MODEL", DEFAULT_MODEL).strip() or DEFAULT_MODEL
 
 
+def realtime_configuration() -> tuple[str, str]:
+    model = os.getenv("OPENAI_REALTIME_MODEL", DEFAULT_REALTIME_MODEL).strip() or DEFAULT_REALTIME_MODEL
+    voice = os.getenv("OPENAI_REALTIME_VOICE", DEFAULT_REALTIME_VOICE).strip() or DEFAULT_REALTIME_VOICE
+    return model, voice
+
+
+def create_realtime_call(sdp_offer: str, context: dict[str, Any]) -> str:
+    """Create a Realtime WebRTC call through the backend-only unified interface."""
+    key, _ = configuration()
+    if not key:
+        raise AIProviderError("OpenAI is not configured. Add OPENAI_API_KEY to the backend .env file.")
+    model, voice = realtime_configuration()
+    context_json = _context_text(context)
+    instructions = (
+        "You are MetroPulse AI Voice Agent, a calm and concise metro engineering investigation assistant. "
+        "Speak Hindi by default. If the user speaks English or requests English, answer in English; handle Hindi and Hinglish naturally. "
+        "Keep spoken answers short, use clear pauses around station/equipment/incident IDs, and pronounce technical identifiers carefully. "
+        "Only use the supplied, selected-incident evidence. Observed data is not proof of a cause. Never invent measurements, incidents, "
+        "maintenance records, or confirmed root causes. Clearly say when evidence is missing. For every question about current records, "
+        "anomalies, severity, priority, timelines, evidence, or diagnostic checks, call ask_metropulse_evidence and base your spoken response "
+        "on its result. If that tool fails, say the evidence service is unavailable and do not guess. All prototype data may be simulated.\n\n"
+        "Selected incident context (scoped evidence): " + context_json
+    )
+    session = {
+        "type": "realtime",
+        "model": model,
+        "instructions": instructions,
+        "audio": {
+            "input": {"transcription": {"model": "gpt-4o-mini-transcribe"}, "turn_detection": {"type": "server_vad"}},
+            "output": {"voice": voice},
+        },
+        "tools": [{
+            "type": "function",
+            "name": "ask_metropulse_evidence",
+            "description": "Answer an engineering question from the current MetroPulse incident dataset using the existing backend investigation service. Call for current incident facts, analysis, evidence, priority, timeline, or diagnostic checks.",
+            "parameters": {
+                "type": "object",
+                "properties": {"question": {"type": "string", "description": "The user's question, preserving the language spoken."}},
+                "required": ["question"],
+                "additionalProperties": False,
+            },
+        }],
+        "tool_choice": "auto",
+    }
+    boundary = "----MetroPulse" + uuid.uuid4().hex
+    body = (
+        f"--{boundary}\r\nContent-Disposition: form-data; name=\"sdp\"\r\nContent-Type: application/sdp\r\n\r\n".encode()
+        + sdp_offer.encode("utf-8")
+        + f"\r\n--{boundary}\r\nContent-Disposition: form-data; name=\"session\"\r\nContent-Type: application/json\r\n\r\n".encode()
+        + json.dumps(session, ensure_ascii=False).encode("utf-8")
+        + f"\r\n--{boundary}--\r\n".encode()
+    )
+    request = Request(
+        f"{OPENAI_BASE_URL}/realtime/calls",
+        data=body,
+        headers={"Authorization": f"Bearer {key}", "Content-Type": f"multipart/form-data; boundary={boundary}"},
+        method="POST",
+    )
+    try:
+        with urlopen(request, timeout=30) as response:
+            answer = response.read().decode("utf-8").strip()
+        if not answer.startswith("v=0"):
+            raise ValueError("OpenAI did not return an SDP answer")
+        return answer
+    except HTTPError as error:
+        if error.code == 401:
+            raise AIProviderError("OpenAI rejected the server API key. Check OPENAI_API_KEY.", 503) from None
+        if error.code == 403:
+            raise AIProviderError("OpenAI denied Realtime access. Check project access and billing.", 503) from None
+        if error.code == 404:
+            raise AIProviderError("The configured Realtime model is unavailable. Check OPENAI_REALTIME_MODEL.", 503) from None
+        if error.code == 429:
+            raise AIProviderError("OpenAI rate limited the voice session. Please wait and retry.", 503) from None
+        raise AIProviderError("OpenAI could not create the voice session. Check Realtime model access and retry.", 502) from None
+    except (URLError, TimeoutError, OSError):
+        raise AIProviderError("OpenAI did not respond while connecting the voice session.", 504) from None
+    except (ValueError, UnicodeDecodeError):
+        raise AIProviderError("OpenAI returned an invalid WebRTC session response.", 502) from None
+
+
 def provider_status() -> dict[str, Any]:
     key, model = configuration()
+    realtime_model, realtime_voice = realtime_configuration()
     if not key:
-        return {"configured": False, "available": False, "provider": "OpenAI", "model": model, "status": "not_configured", "message": "Add OPENAI_API_KEY to the backend environment to enable AI investigation."}
+        return {"configured": False, "available": False, "provider": "OpenAI", "model": model, "realtime_model": realtime_model, "realtime_voice": realtime_voice, "status": "not_configured", "message": "Add OPENAI_API_KEY to the backend environment to enable AI investigation."}
     request = Request(f"{OPENAI_BASE_URL}/models/{model}", headers={"Authorization": f"Bearer {key}"})
     try:
         with urlopen(request, timeout=8) as response:
             payload = json.loads(response.read().decode("utf-8"))
         available = payload.get("id") == model
-        return {"configured": True, "available": available, "provider": "OpenAI", "model": model, "status": "online" if available else "model_unavailable", "message": "OpenAI credentials and selected model are available." if available else "The configured OpenAI model is not available for this key."}
+        return {"configured": True, "available": available, "provider": "OpenAI", "model": model, "realtime_model": realtime_model, "realtime_voice": realtime_voice, "status": "online" if available else "model_unavailable", "message": "OpenAI credentials and selected model are available." if available else "The configured OpenAI model is not available for this key."}
     except HTTPError as error:
         if error.code == 401:
             status, message = "invalid_credentials", "OpenAI rejected this API key. Check the key in the backend environment."
@@ -42,9 +126,9 @@ def provider_status() -> dict[str, Any]:
             status, message = "model_unavailable", "The configured OpenAI model was not found or is unavailable to this key."
         else:
             status, message = "unavailable", "OpenAI could not complete the model availability check."
-        return {"configured": True, "available": False, "provider": "OpenAI", "model": model, "status": status, "message": message}
+        return {"configured": True, "available": False, "provider": "OpenAI", "model": model, "realtime_model": realtime_model, "realtime_voice": realtime_voice, "status": status, "message": message}
     except (URLError, TimeoutError, ValueError, OSError):
-        return {"configured": True, "available": False, "provider": "OpenAI", "model": model, "status": "unavailable", "message": "OpenAI could not be reached or the backend credentials could not be checked."}
+        return {"configured": True, "available": False, "provider": "OpenAI", "model": model, "realtime_model": realtime_model, "realtime_voice": realtime_voice, "status": "unavailable", "message": "OpenAI could not be reached or the backend credentials could not be checked."}
 
 
 def _completion(messages: list[dict[str, str]], *, json_mode: bool = False) -> str:
